@@ -47,7 +47,11 @@ $error:        $danger;
 
 // https://stackoverflow.com/questions/46769706/css-100-height-not-working-in-react-app
 html, body, #root, .App {
-  height: 100%;
+  // max-height: calc(100vh - 250px) !important;
+  // max-height: calc(100vh - 250px) !important;
+  // max-height: calc(100vh - 1px) !important;
+  max-height: 100vh
+
 }
 
 * {
@@ -69,7 +73,7 @@ body {
 }
 
 h1 {
-  font-size: 1.9reem;
+  font-size: 1.9rem;
   font-size: 900;
 }
 h2 {

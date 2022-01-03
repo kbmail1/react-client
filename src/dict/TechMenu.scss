@@ -1,0 +1,35 @@
+.techmenu-choices {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  background: none;
+  height: auto;
+  margin-bottom: 20px;
+  padding: 10px 0 0 20px;
+
+  &__choice {
+    height: 40px;
+    text-transform: capitalize;
+    border: 1px solid lightgray;
+    border-radius: 4px 0 0 4px;
+    padding: 5px 40px;
+    background: 0;
+    color: #367588;
+    border-radius: 10px 10px 0 0;
+    transition: 1s;
+    &:hover {
+      transition: 1s;
+      font-weight: 500;
+    }
+    &:focus {
+      border-bottom: 0;
+      font-weight: 600;
+      transition: 1s;
+    }
+  }
+}
+h2 {
+  font-weight: normal !important;
+  font-size: 1.1rem !important;
+}

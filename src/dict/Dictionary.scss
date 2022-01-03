@@ -1,11 +1,7 @@
-
-h1 {
-  font-size: 1.2 !important;
-  font-weight: normal !important;
-  margin-bottom: 0 !important;
-
+.dict-container {
+  position: fixed;
+  margin-top: 5rem;
 }
-
 .dict-query {
   width: 100%;
   position: relative;
@@ -47,4 +43,25 @@ h1 {
   .p-gap {
     margin-bottom: 20px;
   }
+}
+
+.history-list {
+  font-size: smaller;
+  cursor: pointer;
+  display: flex;
+  list-style: none;
+  overflow: auto;
+  justify-items: center;
+  align-content: space-around;
+  font-size: small;
+
+  &__item {
+    position: relative;
+    left: -20px;
+    color: #367588;
+  }
+}
+
+.display-none {
+  display: none;
 }
