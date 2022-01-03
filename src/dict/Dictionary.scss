@@ -57,8 +57,12 @@
 
   &__item {
     position: relative;
-    left: -20px;
+    left: 0px;
     color: #367588;
+
+    &__link::after {
+      content: ' \2192';
+    }
   }
 }
 

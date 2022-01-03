@@ -107,7 +107,7 @@ const DictResult = ({word, callbackLookup}) => {
     </>
 
   let reactElements = [generalInfo]
-
+  // TODO: line 131 - needs KEY prop for li.
   details.map((meanings, ind1) => {
     reactElements.push(<h2>{meanings.partOfSpeech}(s)</h2>)
     meanings.definitions.map((def, ind2) => {
