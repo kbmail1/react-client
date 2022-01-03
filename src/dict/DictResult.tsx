@@ -7,7 +7,7 @@ import axios from 'axios'
 
 // dotenv.config()
 
-const DictResult = ({word, callbackLookup}) => {
+const DictResult = ({ word, callbackLookup }) => {
   const [genData, setGenData] = useState({
     error: '',
     word: '',
@@ -127,32 +127,64 @@ const DictResult = ({word, callbackLookup}) => {
             <div className="dict-table-row">
               <div className="dict-table-cell">synonyms</div>
               <div className="dict-table-cell">
-                <ul style={{ listStyle: 'none' }}>{def.synonyms.map(s =>
-                  <li>
-                    <button
-                      style={{ backgroundColor: 'white', border: '0' , borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
-                      onClick={() => callbackLookup(s)}
-                    >
-                      {s}
-                    </button>
-                  </li>
-                )}
+                <ul style={{ listStyle: 'none' }}>
+                  {
+                    def.synonyms.map((s) => {
+                      console.log('s is: ', s);
+                      console.log('s when split is: ', s.split(' '));
+                      return (
+                        <li key={getKey()}>
+                          {
+                            s.split(' ').map((oneWordInS) => {
+                              return (
+                                <span>
+                                  <button
+                                    style={{ backgroundColor: 'white', border: '0', borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
+                                    onClick={() => callbackLookup(oneWordInS)}
+                                  >
+                                    {oneWordInS}
+                                  </button>
+                                </span>
+                              )
+                            })
+                          }
+                        </li>
+                      )
+                    })
+                  }
                 </ul>
               </div>
             </div>
             <div className="dict-table-row">
               <div className="dict-table-cell">antonyms</div>
               <div className="dict-table-cell">
-                <ul style={{ listStyle: 'none' }}>{def.antonyms.map(a =>
-                  <li>
-                    <button
-                      style={{ backgroundColor: 'white', border: '0' , borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
-                      onClick={() => callbackLookup(a)}
-                    >
-                      {a}
-                    </button>
-                  </li>
-                )}
+                <ul style={{ listStyle: 'none' }}>
+
+                {
+                    def.antonyms.map((a) => {
+                      console.log('a is: ', a);
+                      console.log('a when split is: ', a.split(' '));
+                      return (
+                        <li key={getKey()}>
+                          {
+                            a.split(' ').map((oneWordInA) => {
+                              return (
+                                <span>
+                                  <button
+                                    style={{ backgroundColor: 'white', border: '0', borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
+                                    onClick={() => callbackLookup(oneWordInA)}
+                                  >
+                                    {oneWordInA}
+                                  </button>
+                                </span>
+                              )
+                            })
+                          }
+                        </li>
+                      )
+                    })
+                  }
+
                 </ul>
               </div>
             </div>
@@ -163,9 +195,9 @@ const DictResult = ({word, callbackLookup}) => {
   })
 
   return (
-      <div className='dict-table-container'>
-        {[...reactElements]}
-      </div>
+    <div className='dict-table-container'>
+      {[...reactElements]}
+    </div>
   )
 }
 

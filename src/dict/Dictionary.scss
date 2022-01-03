@@ -10,6 +10,8 @@
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  // Needed - avoids word links (syns, antos) from crossing over on <input> jus a bit, before hiding
+  padding-bottom: 10px;
 
   input[type=text] {
     margin-left: 10px;
@@ -40,6 +42,7 @@
     border-radius: 0 5px 5px 0;
   }
 
+  // necessary
   .p-gap {
     margin-bottom: 20px;
   }
@@ -68,4 +71,4 @@
 
 .display-none {
   display: none;
-}
+};
