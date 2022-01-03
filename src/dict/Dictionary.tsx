@@ -50,8 +50,9 @@ const Dictionary = () => {
   })
 
   return (
-    <>
-        <ul className="history-list">{historyString}</ul>
+    <div className='dict-container'>
+        <h1>Dictionary</h1>
+        <ul className={`${history.length > 0 ? "history-list" : "display-none"}`}>{historyString}</ul>
         <div className="dict-query">
           <input
             type="text"
@@ -67,7 +68,7 @@ const Dictionary = () => {
         </div>
         <p className="p-gap"></p>
       {wordToLookup && <DictResult word={wordToLookup} callbackLookup={callbackLookup} />}
-    </>
+    </div>
   )
 }
 

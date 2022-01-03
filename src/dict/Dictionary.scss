@@ -1,3 +1,7 @@
+.dict-container {
+  position: fixed;
+  margin-top: 5rem;
+}
 .dict-query {
   width: 100%;
   position: relative;
@@ -49,11 +53,15 @@
   overflow: auto;
   justify-items: center;
   align-content: space-around;
-  color: #364598;
+  font-size: small;
 
   &__item {
     position: relative;
     left: -20px;
-    font-size: 12px;
+    color: #367588;
   }
+}
+
+.display-none {
+  display: none;
 }

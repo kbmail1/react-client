@@ -77,9 +77,7 @@ const DictResult = ({word, callbackLookup}) => {
 
   const generalInfo =
     <>
-      <h2 style={{ fontSize: '2rem', fontWeight: 'bolder' }}>
-        General Information
-      </h2>
+      <h2>General Information</h2>
 
       <div className="dict-table">
         <div className="dict-table-body">
@@ -111,7 +109,7 @@ const DictResult = ({word, callbackLookup}) => {
   let reactElements = [generalInfo]
 
   details.map((meanings, ind1) => {
-    reactElements.push(<h2 style={{ fontSize: '1.6rem', fontWeight: '900' }}>{meanings.partOfSpeech}(s)</h2>)
+    reactElements.push(<h2>{meanings.partOfSpeech}(s)</h2>)
     meanings.definitions.map((def, ind2) => {
       console.log('keyx: ' + meanings.partOfSpeech + ind1 + ind2)
 
@@ -129,15 +127,33 @@ const DictResult = ({word, callbackLookup}) => {
             <div className="dict-table-row">
               <div className="dict-table-cell">synonyms</div>
               <div className="dict-table-cell">
-                <ul style={{listStyle:'none'}}>{def.synonyms.map(s => <li>
-                    {<button style={{ backgroundColor: 'white', border: '0', borderBottom: '1px solid lightgray', color: '#364598' }} onClick={() => callbackLookup(s)}>{s}</button>}</li>)}</ul>
+                <ul style={{ listStyle: 'none' }}>{def.synonyms.map(s =>
+                  <li>
+                    <button
+                      style={{ backgroundColor: 'white', border: '0' , borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
+                      onClick={() => callbackLookup(s)}
+                    >
+                      {s}
+                    </button>
+                  </li>
+                )}
+                </ul>
               </div>
             </div>
             <div className="dict-table-row">
               <div className="dict-table-cell">antonyms</div>
               <div className="dict-table-cell">
-                <ul style={{listStyle:'none'}}>{def.antonyms.map(a => <li>
-                    {<button style={{ backgroundColor: 'white', border: '0', borderBottom: '1px solid lightgray', color: '#364598' }} onClick={() => callbackLookup(a)}>{a}</button>}</li>)}</ul>
+                <ul style={{ listStyle: 'none' }}>{def.antonyms.map(a =>
+                  <li>
+                    <button
+                      style={{ backgroundColor: 'white', border: '0' , borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
+                      onClick={() => callbackLookup(a)}
+                    >
+                      {a}
+                    </button>
+                  </li>
+                )}
+                </ul>
               </div>
             </div>
           </div>
