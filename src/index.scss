@@ -47,7 +47,7 @@ $error:        $danger;
 
 // https://stackoverflow.com/questions/46769706/css-100-height-not-working-in-react-app
 html, body, #root, .App {
-  height: 100%;
+  height: 90vh;
 }
 
 * {

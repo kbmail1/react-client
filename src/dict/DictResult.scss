@@ -1,0 +1,70 @@
+.dict-table-container {
+  // padding: 0 20px 50px 20px;
+  // margin: 0 50px 50px 25px;
+  overflow: auto;
+  width: 35rem;
+  margin: auto;
+  // all VH - for its own view.. taks up header and footer height.
+  // .. thus leaving enough room before footer starts.
+  height:100vh;
+
+}
+  li button {
+    // reduces the (no hidden) bullets and the text.
+    position: relative;
+    left: -30px;
+  }
+.dict-table {
+  display: table;
+  width: 100%;
+  // margin-left: 20px;
+  // margin-right: 50px;
+}
+
+.dict-table-header {
+  display: table-caption;
+  text-align: center;
+  font-size: 1.15rem;
+}
+
+.dict-table-caption {
+  display: table-caption;
+  text-align: left;
+  font-size: 1.05rem;
+  // margin-bottom: 10px;
+  color: #367588;
+}
+
+.dict-table-body {
+  display: table-row-group;
+}
+
+.dict-table-row {
+  display: table-row;
+}
+
+.dict-table-cell {
+  font-size: 0.8rem;
+  display: table-cell;
+  text-align: left;
+  border-bottom: 1px solid black;
+  font-size: inherit;
+
+  &:nth-child(1) {
+    background-color: lightgray;
+    width: 120px;
+    text-align: right;
+    padding-right: 10px;
+
+    &::after {
+      content: ' '
+    }
+  }
+  &:nth-child(2)  {
+    padding: 10px 0 10px 10px;
+  }
+}
+
+.display-none {
+  display: none;
+}

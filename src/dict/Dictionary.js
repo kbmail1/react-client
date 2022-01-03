@@ -3,7 +3,7 @@ import './Dictionary.scss'
 import { Button } from 'react-bootstrap'
 import { useState } from 'react'
 import axios from 'axios'
-import DictReactResultContainer from './DictReactResultContainer'
+import DictResultContainer from './DictResultContainer'
 const Dictionary = (props) => {
   const [word, setWord] = useState('')
   const [choices, setChoices] = useState([])
@@ -166,7 +166,7 @@ const Dictionary = (props) => {
           {
             className: 'dict-results__container',
             children: _jsx(
-              DictReactResultContainer,
+              DictResultContainer,
               { word: word, wordInfo: wordInfo },
               void 0
             ),
