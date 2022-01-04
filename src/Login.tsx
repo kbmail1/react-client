@@ -1,38 +1,21 @@
 import React, { useState, useContext } from 'react'
-import AppContext, { Role } from './AppContext'
 import Banner, * as banner from './common/Banner'
-import { useNavigate } from 'react-router-dom'
 import './Login.scss'
 import axios from 'axios'
-import { relayStylePagination } from '@apollo/client/utilities'
 
 // === React Component ===
-const Login = () => {
-  const [creds, setCreds] = useState({ userid: '', password: '' })
-  const navigate = useNavigate()
-  const [errors, setErrors] = useState({
-    userIdError: false,
-    passwordError: false,
-  })
+const Login = (props) => {
 
-  const handleSubmit = (e) => {
-    // login
-    const restUrl = `https://localhost:8888/login/`
-    console.log('login: handleSubmit: Login form Submitted', e.target.name)
-    axios
-      .post(restUrl, creds)
-      .then((res) => {
-        if (res.data.status) {
-          navigate('/App')
-        } else {
-          console.log(`Error: get from ${restUrl} failed. Error: ${res.data.error}.  For now stil navigate to main.`)
-          navigate('/App')
-        }
-      })
-      .catch ( (err)  => {
-        console.log('Err in catch: still navigate to same.Laater to fail or re - login page.', err);
-        navigate('/App')
-      })
+  const [creds, setCreds] = useState({
+    userid: '',
+    password: '',
+  });
+
+  // in case not logged out when here, logout first.
+  if (props.role !== 'guest') {
+    props.updateLoginStatus('guest')
+    return
+  }
 
   const handleChange = (e) => {
     // keep input, password fields up to date.
@@ -41,6 +24,27 @@ const Login = () => {
       [e.target.id]: e.target.value,
     })
     console.log('login: handleChange: creds: ', creds)
+  }
+
+  const handleSubmit = () => {
+    console.log(`login: userid: ${creds.userid} and password: ${creds.password}`)
+    // login
+    const restUrl = `https://localhost:8888/login/`
+    let role = 'guest'
+    axios
+      .post(restUrl, {creds})
+      .then((res) => {
+        if (res.data.status) {
+          props.updateLoginSatus(res.data.role)
+        } else {
+          console.log(`1-Error: get from ${restUrl} failed. Error: ${res.data.error}.  For now stil navigate to main.`)
+          props.updateLoginSatus('guest')
+        }
+      })
+      .catch((err) => {
+        console.log('2-Error in catch: still navigate to same.Laater to fail or re - login page.', err);
+        props.updateLoginSatus('guest')
+      })
   }
 
   return (

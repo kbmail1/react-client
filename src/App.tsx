@@ -1,24 +1,30 @@
-import './App.scss'
-import Header from './common/Header'
-import Footer from './common/Footer'
-import Dictionary from './dict/Dictionary'
-import Landing from './Landing'
-// import Login from './Login'
-import roles from './auth/roles.json'
+import React, { useState, } from 'react'
 import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
+import Header from './common/Header'
+import Login from './Login'
+import Footer from './common/Footer'
+import './App.scss'
+import { now, templateSettings } from 'lodash'
 
-// note - LInks aare in header.
-const App = (props) => {
+// instead of making up func types for exact match pass null for initial context.
+// const C = React.createContext (null)
+
+const App = () => {
+  // add userid, personalization, tokens etc. later.
+  const [role, setRole] = useState('guest')
+
+  const updateLoginStatus = (role: string) => {
+    setRole(role)
+  }
+
   return (
-    <>
       <div className="app-container">
-        <Header role={props.role} />
-          <Outlet />
+        <Header />
+      {role === 'guest' && <Login role={role} updateLoginStatus={updateLoginStatus} />}
+        { role !== 'guest' && <Outlet />}
         <Footer />
       </div>
-
-    </>
   )
 }
 
