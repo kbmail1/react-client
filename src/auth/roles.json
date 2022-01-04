@@ -1,0 +1,19 @@
+{
+  "roles": [
+  {
+    "role": "guest",
+    "permissions": ["/login", "/about"]
+  },
+  {
+    "role": "basicAuth",
+    "permissions": ["/login", "/dict", "/bbout"]
+  },
+  {
+    "role": "oAuth",
+    "permissions": ["/dict", "/login", "/dict", "/bbout"]
+  },
+  {
+    "role": "mfa",
+    "permissions": ["/pwa", "/dict", "/login", "/hangman", "/about"]
+  }
+}

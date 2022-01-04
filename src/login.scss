@@ -1,4 +1,11 @@
-/*  @import './index.scss'; */
+@use './index.scss';
+
+$btn-blue-bg: #3498db;
+$input-bg: #ecf0f1;
+$input-hover-bg: #acd0d1;
+$border-color: #2980b9;
+$teal-blue: #367588;
+$btn-hover-bg: $teal-blue;
 
 ul.login-form {
   list-style: none;
@@ -52,7 +59,7 @@ input[type='password'] {
   display: inline-block;
 
   &:focus {
-    color: $teal-blue;
+    color: #367588;
   }
   &:hover {
     background-color: $input-hover-bg;

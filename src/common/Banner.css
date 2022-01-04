@@ -1,0 +1,197 @@
+@use '../index.scss';
+.banner-box__error {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  position: fixed;
+  top: 75px;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  height: 120px;
+  z-index: 100;
+  width: 80%;
+  border: 1px solid #666;
+  border-radius: 1k0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 400;
+  font-size: small;
+  background-image: url("../resources/images/banner_error.svg");
+  background-color: red;
+}
+
+.banner-box__warn {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  position: fixed;
+  top: 75px;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  height: 120px;
+  z-index: 100;
+  width: 80%;
+  border: 1px solid #666;
+  border-radius: 1k0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 400;
+  font-size: small;
+  background-image: url("../resources/images/banner_warn.svg");
+  background-color: #ffc107;
+}
+
+.banner-box__info {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  position: fixed;
+  top: 75px;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  height: 120px;
+  z-index: 100;
+  width: 80%;
+  border: 1px solid #666;
+  border-radius: 1k0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 400;
+  font-size: small;
+  background-image: url("../resources/images/banner_info.svg");
+  background-color: #0dcaf0;
+}
+
+.banner-box__success {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  position: fixed;
+  top: 75px;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+  height: 120px;
+  z-index: 100;
+  width: 80%;
+  border: 1px solid #666;
+  border-radius: 1k0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 400;
+  font-size: small;
+  background-image: url("../resources/images/banner_success.svg");
+  background-color: #198754;
+}
+
+.banner-box__title {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.banner-box__subtitle {
+  font-size: 0.92rem;
+  font-weight: 400;
+}
+
+.banner-box__description {
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+.banner-box__timerbar-container {
+  position: absolute;
+  bottom: 0.8em;
+  right: 0.9em;
+  height: 4px;
+  width: 100px;
+  border-right: 1px solid darkgray;
+  border-left: 1px solid darkgray;
+}
+
+.banner-box__timer-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: darkgray;
+}
+
+.banner-box__timer-text {
+  position: absolute;
+  top: 4px;
+  left: 90%;
+  font-size: 0.5rem;
+}
+
+.banner-box__x {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  cursor: pointer;
+}
+
+.banner__hide {
+  display: none;
+}
+
+.banner__show {
+  display: block;
+}
+
+.displayNone {
+  display: none;
+}
+/*# sourceMappingURL=Banner.css.map */

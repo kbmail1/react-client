@@ -34,7 +34,7 @@ const Dictionary = (props) => {
       console.log('Enter a word to look up ...')
     } else {
       console.log('----- word is', word)
-      axios.get(`http://localhost:8081/rest/word/${word}`).then((result) => {
+      axios.get(`http://localhost:8081/dict/${word}`).then((result) => {
         console.log(result.data)
         setWordInfo(result.data)
         console.log('------end-----')

@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,IAAI,CAAC;EACH,MAAM,EAAC,IAAI;EACX,KAAK,EAAE,IAAI;EACX,gBAAgB,EAAE,IAAI;CACvB",
-    "sources": [
-        "time-bar.scss"
-    ],
-    "names": [],
-    "file": "time-bar.css"
-}

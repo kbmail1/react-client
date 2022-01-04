@@ -1,34 +1,86 @@
+@use '../index.scss';
+.dict-container {
+  position: fixed;
+  margin-top: 5rem;
+}
+
 .dict-query {
+  width: 100%;
+  position: relative;
+  top: 20px;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-bottom: 10px;
 }
 
-.dict-choices {
+.dict-query input[type=text] {
+  margin-left: 10px;
+  overflow: visible;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px 10px;
+  font-size: 1.1rem;
+  width: 50vw;
+  height: 45px;
+  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
+}
+
+.dict-query .search-button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 50px;
+  height: 45px;
+  background-color: lightblue;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0iYmkgYmktc2VhcmNoIiB2aWV3Qm94PSIwIDAgMTYgMTYiPgogIDxwYXRoIGQ9Ik0xMS43NDIgMTAuMzQ0YTYuNSA2LjUgMCAxIDAtMS4zOTcgMS4zOThoLS4wMDFjLjAzLjA0LjA2Mi4wNzguMDk4LjExNWwzLjg1IDMuODVhMSAxIDAgMCAwIDEuNDE1LTEuNDE0bC0zLjg1LTMuODVhMS4wMDcgMS4wMDcgMCAwIDAtLjExNS0uMXpNMTIgNi41YTUuNSA1LjUgMCAxIDEtMTEgMCA1LjUgNS41IDAgMCAxIDExIDB6Ii8+Cjwvc3ZnPg==);
+  background-repeat: no-repeat;
+  background-position: top 50% right 50%;
+  background-size: 35px 35px;
+  background-color: white;
+  border: 1px solid black;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+}
+
+.dict-query .p-gap {
+  margin-bottom: 20px;
+}
+
+.history-list {
+  font-size: smaller;
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  padding: 10px 0 0 0;
-  margin: 0;
+  list-style: none;
+  overflow: auto;
+  justify-items: center;
+  -ms-flex-line-pack: distribute;
+      align-content: space-around;
+  font-size: small;
 }
 
-.dict-choice {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+.history-list__item {
+  position: relative;
+  left: 0px;
+  color: #367588;
 }
 
-.dict-choice__submit {
-  margin: 10px 0 0 20px;
+.history-list__item__link::after {
+  content: ' \2192';
+}
+
+.display-none {
+  display: none;
 }
 /*# sourceMappingURL=Dictionary.css.map */

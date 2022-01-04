@@ -1,119 +1,63 @@
-/*
-  const [pgbarUpdates, setPgbarUpdates] = useState(
-    ... const widthPc = (100 * pgbarUpdates) / myProps.totalDuration
-  )
-*/
-
 import React, { useEffect, useState } from 'react'
+import { InternalSymbolName } from 'typescript';
 import './Banner.scss'
 
-export const enum BannerSeverity {
-  Error = 1,
-  Warn,
-  Info,
-  Success,
-}
-const images = {
-  [BannerSeverity.Error]: './resources/images/banner_error',
-  [BannerSeverity.Warn]: './resources/images/banner_warn',
-  [BannerSeverity.Info]: './resources/images/banner_info',
-  [BannerSeverity.Success]: './resources/images/banner_success',
-}
-
-export interface IBannerConfig {
-  title: string
-  subTitle: string
-  message: string
-  severity: BannerSeverity
-  totalDuration: number
-  updateFrequency: number
-}
-
-// =======================
-// === React Component ===
-// =======================
-
-/*  props:config, callback, width */
 const Banner = (props) => {
-  const totalUpdates = props.config.totalDuration / props.config.updateFrequency
-  const [updatesLeft, setUpdatesLeft] = useState(totalUpdates)
+  const [secondsLeft, setSecondsLeft] = useState(props.config.totalDuration)
 
+  let intervalHandler;
   useEffect(() => {
-    const handle = setInterval(() => {
+    intervalHandler = setInterval(() => {
       console.log(`setInterval useeffect`)
+      setSecondsLeft(secondsLeft - 1)
+    }, 1000)
 
-      setUpdatesLeft(updatesLeft - 1)
-      console.log(`setInterval updatesLeft: ${updatesLeft}`)
-      console.log(`setInterval totalUpdates: ${totalUpdates}`)
-
-      const widthPercent = (100 * updatesLeft) / totalUpdates
-      console.log(`setInterval widthPercent: ${widthPercent}`)
-      if (widthPercent > 0) {
-        console.log('true')
-        props.callback(true, widthPercent)
-      } else {
-        console.log('false')
-        props.callback(false, 0)
-      }
-    }, props.config.updateFrequency * 1000)
-    return () => clearInterval(handle)
-  }) // no dependancies. run at mount time to set the setInterval method.
+    return () => clearInterval(intervalHandler)
+  })
 
   console.log(`1. bannerConfig props: ${JSON.stringify(props.config, null, 2)}`)
 
-  const handleClickOnCloseBanner = (e) => {
-    console.log(`close click`)
-    props.callback(false, 0)
-  }
-  const handleKeyPressOnCloseBanner = (e) => {
-    if (e.key === 'Enter') {
-      console.log(`key press handler: ${e.key}`)
-      props.callback(false, 0)
-    } else {
-      console.log(`[not enter key.  no action] key press handler: ${e.key}`)
+  const onKeyPress = ((e) => {
+    if (e.target.value === 'Enter') {
+      clearInterval(intervalHandler)
+      setSecondsLeft(0)
     }
+  })
+
+  const handleClickOnCloseBanner = (e) => {
+    clearInterval(intervalHandler)
+    setSecondsLeft(0)
   }
 
-  const imageSrc = images[props.config.severity]
-  console.log(`imgsrc:${imageSrc}`)
-
-  // dynamic width style
-  const barWidth = {
-    width: 100 - +props.width + '%',
+  let bannerClass = 'banner-box__info';
+  if (props.config.severity.toLowerCase().indexOf('error') >= 0) {
+    bannerClass = 'banner-box__error'
+  } else if (props.config.severity.toLowerCase().indexOf('warn') >= 0) {
+    bannerClass = 'banner-box__warn'
+  } else if (props.config.severity.toLowerCase().indexOf('info') >= 0) {
+    bannerClass = 'banner-box__info'
+  } else if (props.config.severity.toLowerCase().indexOf('success') >= 0) {
+    bannerClass = 'banner-box__success'
   }
 
-  let bgImage = './resources/images/banner-info.svg'
-  if (props.config.severity === BannerSeverity.Error) {
-    bgImage = './resources/images/banner-error.svg'
-  } else if (props.config.severity === BannerSeverity.Warn) {
-    bgImage = './resources/images/banner-error.svg'
-  } else if (props.config.severity === BannerSeverity.Success) {
-    bgImage = './resources/images/banner-success.svg'
-  } else {
-    bgImage = './resources/images/banner-info.svg'
-  }
+  // https://stackoverflow.com/questions/34521797/how-to-add-multiple-classes-to-a-reactjs-component
+  const classes = `${bannerClass}`
 
-  const bgImageProp = {
-    backgroundImage: 'url(' + bgImage + ');',
+  if (secondsLeft < 0) {
+    return <></>
   }
-
-  // <!<div className="banner-box" style={bgImageProp}>
   return (
-    <div className="banner-box">
+    <div className={classes}>
       <span className="banner-box__title">{props.config.title}</span>
       <hr />
       <span className="banner-box__subtitle">{props.config.subTitle}</span>
       <span className="banner-box__description">{props.config.message}</span>
 
-      <div className="banner-box__timerbar-container">
-        <div className="banner-box__timer-text">{props.width}</div>
-        <div id="timerbar" className="banner-box__timer-bar" style={barWidth} />
-      </div>
       <div
         className="banner-box__x"
         role="button"
         onClick={handleClickOnCloseBanner}
-        onKeyPress={handleKeyPressOnCloseBanner}
+        onKeyPress={(e) => { e.key === 'Enter' ? setSecondsLeft(0) : undefined }}
         tabIndex={0}
       >
         {'\u2715'}

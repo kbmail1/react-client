@@ -1,52 +1,4 @@
-* {
-  font-family: 'sans-serif', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana;
-}
-
-html {
-  height: 100vh;
-  width: 100vw;
-}
-
-body {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
-  width: 100%;
-  font-weight: 400;
-  height: 100vh;
-  font-size: 16px;
-  text-align: center;
-  margin: 0 !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-weight: bolder;
-}
-
-h1 {
-  font-size: 1.5em;
-}
-
-h2 {
-  font-size: 1.4em;
-}
-
-h3 {
-  font-size: 1.3em;
-}
-
-h4 {
-  font-size: 1.2em;
-}
-
-h5 {
-  font-size: 1.1em;
-}
-
+@use './index.scss';
 ul.login-form {
   list-style: none;
   padding: 10px;
@@ -168,4 +120,4 @@ button:hover {
 .btn:hover {
   background: #2cc06b;
 }
-/*# sourceMappingURL=login.css.map */
+/*# sourceMappingURL=Login.css.map */

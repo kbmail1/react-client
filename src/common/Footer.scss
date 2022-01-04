@@ -1,6 +1,6 @@
-$teal-blue: #367588;
-$header-bg: $teal-blue;
-$footer-bg: $teal-blue;
+@use '../index.scss';
+
+$footer-bg: #367588;
 
 footer {
   position: fixed;

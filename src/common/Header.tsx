@@ -10,23 +10,21 @@ import Landing from '../Landing'
 import About from '../About'
 import NotFound from '../NotFound'
 import Dictionary from '../dict/Dictionary'
+import Hangman from '../Hangman'
+import PWA from '../PWA'
+import roles from '../auth/roles.json'
+import RbackMenu from '../auth/RbackMenu'
 
-const Header = () => {
+const Header = (props) => {
   const appContext = useContext(AppContext)
 
-  let showMenu: string[] = []
-  showMenu = adminMenu
-
+  console.group('header: props: ', props)
   return (
     <>
       <header>
         <div className="header-title">Meander Inc.</div>
         <div className="header-menu">
-          <ul>
-            <li>first</li>
-            <li>second</li>
-            <li>last</li>
-          </ul>
+          <RbackMenu role={props.role} />
         </div>
       </header>
     </>

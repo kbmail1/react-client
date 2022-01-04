@@ -1,5 +1,4 @@
 import './Dictionary.scss'
-import { Button } from 'react-bootstrap'
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import DictResult from './DictResult'

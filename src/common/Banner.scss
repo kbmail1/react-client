@@ -1,13 +1,13 @@
-$error: #dc354540;
-$warn: #ffc10740;
-$info: #367588;
+@use '../index.scss';
+
+$warning: #ffc107;
+$info: #0dcaf0;
 $success: #198754;
 
-.banner-box {
-  background-image: url('./resources/images/banner_warn.svg');
-  background-repeat: no-repeat;
-  background-color: $warn;
+@mixin banner-mixin {
   box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: 10px 10px;
   padding-right: 5px;
   padding-left: 5px;
 
@@ -21,7 +21,7 @@ $success: #198754;
 
   // background-color: #ecf0f1;
   border: 1px solid #666;
-  border-radius: 10px;
+  border-radius: 1k0px;
 
   display: flex;
   flex-direction: column;
@@ -31,68 +31,72 @@ $success: #198754;
 
   font-weight: 400;
   font-size: small;
+}
 
-  &.error {
-    background-image: url('./resources/images/banner_error.svg');
-    background-color: $error;
-  }
-  &.warn {
-    background-image: url('./resources/images/banner_warn.svg');
-    background-color: $warn;
-  }
-  &.info {
-    background-image: url('./resources/images/banner_info.svg');
-    background-color: $info;
-  }
-  &.success {
-    background-image: url('./resources/images/banner_success.svg');
-    background-color: $success;
-  }
+.banner-box__error {
+  @include banner-mixin;
+  background-image: url('../resources/images/banner_error.svg');
+  background-color: red;
+}
+.banner-box__warn {
+  @include banner-mixin;
+  background-image: url('../resources/images/banner_warn.svg');
+  background-color: $warning;
+}
+.banner-box__info {
+  @include banner-mixin;
+  background-image: url('../resources/images/banner_info.svg');
+  background-color: $info;
+}
+.banner-box__success {
+  @include banner-mixin;
+  background-image: url('../resources/images/banner_success.svg');
+  background-color: $success;
+}
 
-  .banner-box__title {
-    font-size: 1rem;
-    font-weight: 800;
-  }
-  .banner-box__subtitle {
-    font-size: 0.92rem;
-    font-weight: 400;
-  }
-  .banner-box__description {
-    font-size: 0.85rem;
-    font-weight: 300;
-  }
+.banner-box__title {
+  font-size: 1rem;
+  font-weight: 800;
+}
+.banner-box__subtitle {
+  font-size: 0.92rem;
+  font-weight: 400;
+}
+.banner-box__description {
+  font-size: 0.85rem;
+  font-weight: 300;
+}
 
-  .banner-box__timerbar-container {
-    position: absolute;
-    bottom: 0.8em;
-    right: 0.9em;
-    height: 4px;
-    width: 100px;
-    // background: darkgray;
-    border-right: 1px solid darkgray;
-    border-left: 1px solid darkgray;
-  }
-  .banner-box__timer-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: darkgray;
-  }
-  .banner-box__timer-text {
-    position: absolute;
-    top: 4px;
-    left: 90%;
-    font-size: 0.5rem;
-  }
+.banner-box__timerbar-container {
+  position: absolute;
+  bottom: 0.8em;
+  right: 0.9em;
+  height: 4px;
+  width: 100px;
+  // background: darkgray;
+  border-right: 1px solid darkgray;
+  border-left: 1px solid darkgray;
+}
+.banner-box__timer-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: darkgray;
+}
+.banner-box__timer-text {
+  position: absolute;
+  top: 4px;
+  left: 90%;
+  font-size: 0.5rem;
+}
 
-  .banner-box__x {
-    position: absolute;
-    top: 0.05em;
-    right: 0.2em;
-    cursor: pointer;
-  }
+.banner-box__x {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  cursor: pointer;
 }
 
 .banner__hide {
@@ -100,16 +104,6 @@ $success: #198754;
 }
 .banner__show {
   display: block;
-}
-
-banner__time-container {
-  height: 2px;
-  border-width: 1px;
-  width: 0.3em;
-  position: absolute;
-  top: 0.8em;
-  left: 0.6em;
-  display: flex;
 }
 
 .displayNone {

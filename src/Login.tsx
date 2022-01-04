@@ -1,30 +1,41 @@
 import React, { useState, useContext } from 'react'
 import AppContext, { Role } from './AppContext'
-import Banner, * as banner from './Banner'
-import './login.scss'
+import Banner, * as banner from './common/Banner'
+import { useNavigate } from 'react-router-dom'
+import './Login.scss'
+import axios from 'axios'
+import { relayStylePagination } from '@apollo/client/utilities'
 
 // === React Component ===
 const Login = () => {
   const [creds, setCreds] = useState({ userid: '', password: '' })
+  const navigate = useNavigate()
   const [errors, setErrors] = useState({
     userIdError: false,
     passwordError: false,
   })
 
-  const appContext = useContext(AppContext)
-
   const handleSubmit = (e) => {
+    // login
+    const restUrl = `https://localhost:8888/login/`
     console.log('login: handleSubmit: Login form Submitted', e.target.name)
+    axios
+      .post(restUrl, creds)
+      .then((res) => {
+        if (res.data.status) {
+          navigate('/App')
+        } else {
+          console.log(`Error: get from ${restUrl} failed. Error: ${res.data.error}.  For now stil navigate to main.`)
+          navigate('/App')
+        }
+      })
+      .catch ( (err)  => {
+        console.log('Err in catch: still navigate to same.Laater to fail or re - login page.', err);
+        navigate('/App')
+      })
 
-    if (appContext?.login(creds)) {
-      appContext.isLoggedIn = true
-      appContext.userId = creds.userid
-      appContext.role = Role.Admin
-      return <Redirect to="/login" />
-    }
-  }
   const handleChange = (e) => {
-    // this keeps field values up to date.
+    // keep input, password fields up to date.
     setCreds({
       ...creds,
       [e.target.id]: e.target.value,
@@ -32,40 +43,8 @@ const Login = () => {
     console.log('login: handleChange: creds: ', creds)
   }
 
-  // Banner component callback.
-  const [bannerUpdates, setBannerUpdates] = useState({
-    show: false,
-    percentWidth: 100,
-  })
-  console.log(`InitialbannerUpdates: ${JSON.stringify(bannerUpdates)}`)
-  // banner show it when page loads.
-  const bannerConfig: banner.IBannerConfig = {
-    title: 'K Banner',
-    subTitle: 'K Banner subtitle',
-    message: 'K Banner message',
-    severity: banner.BannerSeverity.Info,
-    totalDuration: 10,
-    updateFrequency: 1,
-  }
-  const bannerCallback = (show: boolean, percentWidth: number) => {
-    setBannerUpdates({
-      ...bannerUpdates,
-      show,
-      percentWidth,
-    })
-  }
-  console.log(`bannerUpdates: ${JSON.stringify(bannerUpdates)}`)
-  console.log(`bannerUpdates.show: ${bannerUpdates.show}`)
-
   return (
     <>
-      {bannerUpdates.show && (
-        <Banner
-          config={bannerConfig}
-          callback={bannerCallback}
-          width={bannerUpdates.percentWidth}
-        />
-      )}
       <ul
         className="login-form"
         style={{

@@ -1,0 +1,48 @@
+@use '../index.scss';
+.techmenu-choices {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  background: none;
+  height: auto;
+  margin-bottom: 20px;
+  padding: 10px 0 0 20px;
+}
+
+.techmenu-choices__choice {
+  height: 40px;
+  text-transform: capitalize;
+  border: 1px solid lightgray;
+  border-radius: 4px 0 0 4px;
+  padding: 5px 40px;
+  background: 0;
+  color: #367588;
+  border-radius: 10px 10px 0 0;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.techmenu-choices__choice:hover {
+  -webkit-transition: 1s;
+  transition: 1s;
+  font-weight: 500;
+}
+
+.techmenu-choices__choice:focus {
+  border-bottom: 0;
+  font-weight: 600;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+h2 {
+  font-weight: normal !important;
+  font-size: 1.1rem !important;
+}
+/*# sourceMappingURL=TechMenu.css.map */

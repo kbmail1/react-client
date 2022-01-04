@@ -1,11 +1,7 @@
 import './DictResult.scss'
 import { useQuery, gql } from '@apollo/client'
 import { useState, useEffect } from 'react'
-import { NavItem } from 'react-bootstrap'
-// import dotenv from 'dotenv'
 import axios from 'axios'
-
-// dotenv.config()
 
 const DictResult = ({ word, callbackLookup }) => {
   const [genData, setGenData] = useState({
@@ -27,8 +23,7 @@ const DictResult = ({ word, callbackLookup }) => {
     return Math.floor(100000 + Math.random() * 900000)
   }
 
-  const restUrl = `https://localhost:8888/rest/word/${word}`
-
+  const restUrl = `https://localhost:8888/dict/${word}`
   useEffect(() => {
     axios
       .get(restUrl)
@@ -78,7 +73,6 @@ const DictResult = ({ word, callbackLookup }) => {
   const generalInfo =
     <>
       <h2>General Information</h2>
-
       <div className="dict-table">
         <div className="dict-table-body">
 
