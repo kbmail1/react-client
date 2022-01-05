@@ -1,27 +1,35 @@
 const r2p = [
   {
     'role': 'guest',
-    'permissions': ['/login', '/about']
+    'permissions': ['/about', '/logout']
   },
   {
     'role': 'subscriber',
-    'permissions': ['/dict', '/login', '/about']
+    'permissions': ['/dict', '/about', '/logout']
   },
   {
     'role': 'admin',
-    'permissions': ['/pwa', '/dict', '/login', '/about']
+    'permissions': ['/pwa', '/dict', '/about', '/logout']
   },
   {
     role: 'root',
-    permissions: ['hangman', '/pwa', '/dict', '/login', '/about']
+    permissions: ['/hangman', '/pwa', '/dict', '/about', '/logout']
   }
 ]
 
+// BUG: TODO: empty perms...
 export const getPermsByRole = (role): string[] => {
-  const r2pArray = r2p.filter((nxt) => {
-    nxt.role === role
-  })
-  return r2pArray.length === 1 ? r2pArray[0].permissions : []
+  console.log(`getPermesByRole: role: ${role}`)
+  let returnPerms = []
+  r2p.forEach(element => {
+    if (role === element.role) {
+      return element.permissions
+    }
+  });
+  console.log(`getPermsByRole: returning perms: ${returnPerms}`)
+  // return returnPerms
+
+  return ['/hangman', '/pwa', '/dict', '/login', '/about']
 }
 
 export const isPermValidForRole = (role): boolean => {

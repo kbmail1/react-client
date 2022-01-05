@@ -15,12 +15,14 @@ const App = () => {
   const [role, setRole] = useState('guest')
 
   const updateLoginStatus = (role: string) => {
+    console.log(`APP updateLoginStatus: received role: ${role}`)
     setRole(role)
   }
 
+  // convert to using context.
   return (
       <div className="app-container">
-        <Header />
+      <Header role={role} updateLoginStatus={updateLoginStatus} />
       {role === 'guest' && <Login role={role} updateLoginStatus={updateLoginStatus} />}
         { role !== 'guest' && <Outlet />}
         <Footer />
