@@ -1,0 +1,52 @@
+$teal-blue: #367599;
+$light-blue: #7ab9dd;
+
+body {
+  min-width: 50rem !important;
+  overflow: auto;
+}
+.hangman {
+  border: 1px solid red;
+  margin: auto;
+  padding: 0 20px 0 20px;
+  width: 80%;
+  min-width: 50rem;
+  position: absolute;
+  top: 200px;
+  display: flex;
+  flex-direction: column;
+  ;
+
+  &__alpha {
+    color: $teal-blue;
+    text-transform: lowercase;
+
+    &__used {
+      text-decoration: dotted;
+      color: $light-blue;
+    }
+
+    &__invalid {
+      color: red;
+      text-transform: lowercase;
+    }
+
+    &__valid {
+      text-transform: lowercase;
+      color: green;
+      text-decoration: underline;
+
+      &:first-child {
+        text-transform: capitalize;
+      }
+    }
+  }
+  &__numeric {
+    // consider reddening as we approach limit.
+    color: $teal-blue;
+  }
+
+  _geometric {
+    color: red;
+  }
+}

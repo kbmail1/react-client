@@ -1,11 +1,9 @@
+import './App.scss'
 import React, { useState, } from 'react'
-import { Link } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
 import Header from './common/Header'
 import Login from './Login'
 import Footer from './common/Footer'
-import './App.scss'
-import { now, templateSettings } from 'lodash'
 
 // instead of making up func types for exact match pass null for initial context.
 // const C = React.createContext (null)
