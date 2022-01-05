@@ -6,16 +6,15 @@ body {
   overflow: auto;
 }
 .hangman {
-  border: 1px solid red;
   margin: auto;
   padding: 0 20px 0 20px;
   width: 80%;
   min-width: 50rem;
   position: absolute;
-  top: 200px;
+  top: 100px;
   display: flex;
   flex-direction: column;
-  ;
+  //justify-content: flex-start;
 
   &__alpha {
     color: $teal-blue;
@@ -32,9 +31,9 @@ body {
     }
 
     &__valid {
-      text-transform: lowercase;
       color: green;
-      text-decoration: underline;
+      text-transform: lowercase;
+      background-color: white;
 
       &:first-child {
         text-transform: capitalize;
@@ -46,7 +45,12 @@ body {
     color: $teal-blue;
   }
 
-  _geometric {
-    color: red;
+  .noose-box  {
+    background-color: lightyellow;
+    margin: auto;
+    width: 20rem;
+    min-width: 20rem;
+    height:25rem;
+    min-height:25rem;
   }
 }

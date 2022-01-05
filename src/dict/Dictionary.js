@@ -3,6 +3,7 @@ import './Dictionary.scss'
 import { Button } from 'react-bootstrap'
 import { useState } from 'react'
 import axios from 'axios'
+
 import DictResultContainer from './DictResultContainer'
 const Dictionary = (props) => {
   const [word, setWord] = useState('')
@@ -34,10 +35,11 @@ const Dictionary = (props) => {
       console.log('Enter a word to look up ...')
     } else {
       console.log('----- word is', word)
-      axios.get(`http://localhost:8081/dict/${word}`).then((result) => {
-        console.log(result.data)
-        setWordInfo(result.data)
-        console.log('------end-----')
+      axios.get(`http://localhost:8081/dict/${word}`)
+        .then((result) => {
+          console.log(result.data)
+          setWordInfo(result.data)
+          console.log('------end-----')
       })
     }
   }

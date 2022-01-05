@@ -30,7 +30,8 @@
     "npm": "^8.3.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^6.2.1"
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "^2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -41,6 +42,7 @@
     "@babel/preset-typescript": "^7.12.16",
     "@babel/runtime": "^7.13.10",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
+    "@svgr/webpack": "^6.1.2",
     "@types/js-yaml": "^4.0.5",
     "@types/lodash": "^4.14.177",
     "@types/react": "^17.0.2",
@@ -59,6 +61,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.1.0",
     "husky": "4",
     "lint-staged": "^10.5.4",
