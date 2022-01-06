@@ -21,8 +21,7 @@ const App = () => {
   return (
       <div className="app-container">
       <Header role={role} updateLoginStatus={updateLoginStatus} />
-      {role === 'guest' && <Login role={role} updateLoginStatus={updateLoginStatus} />}
-        { role !== 'guest' && <Outlet />}
+        <Outlet />
         <Footer />
       </div>
   )

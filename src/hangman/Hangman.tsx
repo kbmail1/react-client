@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import './Hangman.scss'
 import fallbackList, { wordApiUrl } from './FallbackList'
 import axios from 'axios'
-import { updateStatement } from 'typescript'
 // <caption>&#x2639;</caption>
 
 const Hangman = () => {
@@ -12,6 +11,8 @@ const Hangman = () => {
     invalidWordToDisplay: '',
     validWordToDisplay: '',
     wastedAttempts: 0,
+    gameDone: false,
+    gameWon: false
   })
   const MaxAttempts = 8
 
@@ -38,7 +39,6 @@ const Hangman = () => {
     }
 
     // yay - Omedetou. change validWordTodisplay
-
     let wordArray = status.word.split('')
     let displayWordArray = status.validWordToDisplay.split('')
     for (let i = 0; i < wordArray.length; i++) {
@@ -58,18 +58,20 @@ const Hangman = () => {
       .then((result) => {
         // just get the first word from the array returned, in case requested more than 1
         let word = result.data[0]
-          setStatus({
-            word,
-            invalidWordToDisplay: '_'.repeat(word.length),
-            validWordToDisplay: '_'.repeat(word.length),
-            wastedAttempts: 0,
-          })
+        setStatus({
+          ...status,
+          word,
+          invalidWordToDisplay: '_'.repeat(MaxAttempts),
+          validWordToDisplay: '_'.repeat(word.length),
+          wastedAttempts: 0,
+        })
       })
       .catch((err) => {
         console.log(`Get word API failed: ${err}. Pull in from fallback list`)
         const ind = Math.floor(Math.random() * (fallbackList.length - 1))
         let word = fallbackList[ind]
         setStatus({
+          ...status,
           word,
           invalidWordToDisplay: '_'.repeat(word.length),
           validWordToDisplay: '_'.repeat(word.length),
@@ -80,7 +82,7 @@ const Hangman = () => {
 
   // show entire alphabet
 
-  const alphasArray = ['abcdefghi', 'jklmnopqr', 'stuvwxyz']
+  const alphasArray = ['qwertyuiop', 'asdfghjkl', 'zxcvbnm']
   const alphasElems: JSX.Element[] = []
   for (let rowInd = 0; rowInd < alphasArray.length; rowInd++) {
     const rowElems: JSX.Element[] = []
@@ -142,10 +144,25 @@ const Hangman = () => {
 
       <svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
         <rect width="100%" height="100%" />
-        <circle cx="150" cy="100" r="80" fill="green" />
-        <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">
-          SVG
-        </text>
+  -->
+        <line x1="270" y1="270" x2="25" y2="270" strokeWidth="5" stroke="blue" />
+        <line x1="25" y1="26" x2="25" y2="275" strokeWidth="5" stroke="red" />
+        <line x1="25" y1="24" x2="270" y2="24" strokeWidth="5" stroke="yellow" />
+        <line x1="175" y1="30" x2="175" y2="75" strokeWidth="5" stroke="green" />
+        <circle cx="175" cy="75" r="20" fill="white" />
+        <line x1="175" y1="95" x2="175" y2="175" strokeWidth="5" stroke="white" />
+
+        <line x1="175" y1="100" x2="150" y2="125" strokeWidth="5" stroke="white" />
+        <line x1="175" y1="100" x2="200" y2="125" strokeWidth="5" stroke="white" />
+
+        <line x1="175" y1="150" x2="150" y2="175" strokeWidth="5" stroke="white" />
+        <line x1="175" y1="150" x2="200" y2="175" strokeWidth="5" stroke="white" />
+
+        <ellipse cx="167" cy="70" rx="4" ry="4" style={{fill:"red",stroke:"black",strokeWidth:"1"}} />
+        <ellipse cx="183" cy="70" rx="4" ry="4" style={{fill:"red",stroke:"black",strokeWidth:"1"}} />
+
+        <path d="M165,85,
+          C175,75  200,75  185,85" fill="none" stroke="red" strokeWidth="1" />
       </svg>
     </div>
   )

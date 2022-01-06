@@ -1,0 +1,27 @@
+<svg version="1.1" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+  <!--
+  <circle cx="150" cy="100" r="80" fill="green" />
+  <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">
+    SVG
+  </text>
+  -->
+  <line x1="270" y1="270" x2="25" y2="270" stroke-width="5" stroke="blue" />
+  <line x1="25" y1="26" x2="25" y2="275" stroke-width="5" stroke="red" />
+  <line x1="25" y1="30" x2="270" y2="30" stroke-width="5" stroke="yellow" />
+  <line x1="175" y1="30" x2="175" y2="75" stroke-width="5" stroke="green" />
+
+  <circle cx="175" cy="75" r="20" fill="white" />
+  <line x1="175" y1="95" x2="175" y2="175" stroke-width="5" stroke="black" />
+
+  <line x1="175" y1="100" x2="150" y2="125" stroke-width="5" stroke="black" />
+  <line x1="175" y1="100" x2="200" y2="125" stroke-width="5" stroke="black" />
+
+  <line x1="175" y1="150" x2="150" y2="175" stroke-width="5" stroke="black" />
+  <line x1="175" y1="150" x2="200" y2="175" stroke-width="5" stroke="black" />
+
+  <ellipse cx="167" cy="70" rx="4" ry="4" style="fill:red;stroke:black;stroke-width:1" />
+  <ellipse cx="183" cy="70" rx="4" ry="4" style="fill:red;stroke:black;stroke-width:1" />
+
+  <path d="M165,85,
+           C175,75  200,75  185,85" fill="none" stroke="red" stroke-width="2" />
+</svg>

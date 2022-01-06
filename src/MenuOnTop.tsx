@@ -13,6 +13,8 @@ const MenuOnTop = (props)  => {
     <ul>
     {
       props.perms.map((perm: string) => {
+        console.log('in MenuOTop: perm: ', perm);
+        console.log('in MenuOTop: perm - substring: ', perm.substring(1))
         return (
           <li key={getKey()}><NavLink to={perm}>{perm.substring(1)}</NavLink></li>
         )

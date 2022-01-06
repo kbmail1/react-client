@@ -11,14 +11,6 @@ const Login = (props) => {
     password: '',
   });
 
-  useEffect(() => {
-    if (props.role !== 'guest') {
-      props.updateLoginStatus('guest')
-      return
-    }
-  }, [props.role])
-  // ----------------------
-
   const handleChange = (e) => {
     // keep input, password fields up to date.
     setCreds({
@@ -29,24 +21,22 @@ const Login = (props) => {
   }
 
   const handleSubmit = () => {
-    console.log(`login: userid: ${creds.userid} and password: ${creds.password}`)
+    console.log(`In Handle Submit: login: userid: ${creds.userid} and password: ${creds.password}`)
     // login
     const restUrl = `https://localhost:8888/login/`
     let role = 'guest'
-    console.log('in handle submit: sending in axios request: ${creds}')
+    console.log(`in handle submit: sending in axios request: ${creds}`)
     axios
       .post(restUrl, {creds})
       .then((res) => {
         if (res.data.status) {
-          props.updateLoginStatus(res.data.role)
+          console.log(`handle submit: ${res.data}`)
         } else {
           console.log(`1-Error: get from ${restUrl} failed. Error: ${res.data.error}.  For now stil navigate to main.`)
-          props.updateLoginStatus('guest')
         }
       })
       .catch((err) => {
         console.log('2-Error in catch: still navigate to same.Laater to fail or re - login page.', err);
-        props.updateLoginStatus('guest')
       })
   }
 
@@ -92,6 +82,7 @@ const Login = (props) => {
         </li>
         <li>
           <button className="submit-button" onClick={handleSubmit}>
+            {creds.userid}|{creds.password}
             Submit
           </button>
         </li>
@@ -99,5 +90,6 @@ const Login = (props) => {
     </>
   )
 }
-
+/*
+          */
 export default Login
