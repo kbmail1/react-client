@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Routes,
   Route,
@@ -7,12 +7,19 @@ import {
   useLocation,
   Navigate,
   Outlet
-} from "react-router-dom";
-import { fakeAuthProvider } from "./auth";
+} from 'react-router-dom';
+import { fakeAuthProvider } from './auth'
+import Dictionary from './dict/Dictionary';
+import About from './About'
+import PublicPage from './PublicPage'
+import PWA from './PWA';
+import Hangman from './hangman/Hangman';
+import Header from './common/Header'
 
 export default function App() {
   return (
     <AuthProvider>
+      <Header />
       <h1>Auth Example</h1>
 
       <p>
@@ -36,18 +43,36 @@ export default function App() {
 
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<PublicPage />} />
+          <Route path="/" element={<Dictionary />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/public" element={<PublicPage />} />
           <Route path="/login" element={<LoginPage />} />
 
-          <Route
-            path="/protected"
-            element={
+          <Route path="/protected" element={
               <RequireAuth>
                 <ProtectedPage />
               </RequireAuth>
             }
           />
+
+
+        <Route path="/pwa" element={
+              <RequireAuth>
+                <PWA />
+              </RequireAuth>
+            }
+          />
+
+
+        <Route path="/hangman" element={
+              <RequireAuth>
+                <Hangman />
+              </RequireAuth>
+            }
+          />
         </Route>
+
+
       </Routes>
     </AuthProvider>
   );
@@ -60,14 +85,26 @@ function Layout() {
 
       <ul>
         <li>
-          <Link to="/">Public Page</Link>
+          <Link to="/">Dictionary</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+        <li>
+          <Link to="/public">public</Link>
         </li>
         <li>
           <Link to="/protected">Protected Page</Link>
-      </li>
+        </li>
+        <li>
+          <Link to="/pwa">PWA Page</Link>
+        </li>
+        <li>
+          <Link to="/hangman">Hangman page</Link>
+        </li>
       </ul >
 
-    <Outlet />
+      <Outlet />
     </div >
   );
 }
@@ -148,6 +185,7 @@ function LoginPage() {
   let auth = useAuth();
 
   let from = location.state?.from?.pathname || "/";
+  console.log(`LoginPage: from: ${from}`)
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -180,9 +218,6 @@ function LoginPage() {
   );
 }
 
-function PublicPage() {
-  return <h3>Public</h3>;
-}
 
 function ProtectedPage() {
   return <h3>Protected</h3>;

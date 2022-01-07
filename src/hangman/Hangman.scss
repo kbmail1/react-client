@@ -1,17 +1,11 @@
 $teal-blue: #367599;
 $light-blue: #7ab9dd;
 
-body {
-  min-width: 50rem !important;
-  overflow: auto;
-}
 .hangman {
   margin: auto;
   padding: 0 20px 0 20px;
   width: 80%;
   min-width: 50rem;
-  position: absolute;
-  top: 100px;
   display: flex;
   flex-direction: column;
   //justify-content: flex-start;

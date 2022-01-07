@@ -1,6 +1,6 @@
 const PWA = () => {
   return (
-    <div style={{ position: 'absolute', top: '200px' }}>
+    <div>
       This is &quot;PWA&quot; page
     </div>
   )

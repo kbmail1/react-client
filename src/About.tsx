@@ -1,8 +1,6 @@
 const About = () => {
   return (
-    <div style={{ position: 'absolute', top: '200px' }}>
-      This is &quot;About&quot; page
-    </div>
+    <h3> This is About page</h3>
   )
 }
 
