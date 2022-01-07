@@ -2,6 +2,7 @@ import './DictResult.scss'
 import { useQuery, gql } from '@apollo/client'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { getUniqueKey } from '../common/utils'
 
 const DictResult = ({ word, callbackLookup }) => {
   const [genData, setGenData] = useState({
@@ -17,10 +18,6 @@ const DictResult = ({ word, callbackLookup }) => {
 
   if (!word || !(typeof word === 'string') || word.trim().length === 0) {
     console.log('invalid request.  skipping the loopup')
-  }
-
-  const getKey = () => {
-    return Math.floor(100000 + Math.random() * 900000)
   }
 
   const restUrl = `https://localhost:8888/dict/${word}`
@@ -76,23 +73,23 @@ const DictResult = ({ word, callbackLookup }) => {
       <div className="dict-table">
         <div className="dict-table-body">
 
-          <div key={getKey()} className="dict-table-row">
+          <div key={getUniqueKey()} className="dict-table-row">
             <div className="dict-table-cell">word</div>
             <div className="dict-table-cell">{genData.word}</div>
           </div>
-          <div key={getKey()} className="dict-table-row">
+          <div key={getUniqueKey()} className="dict-table-row">
             <div className="dict-table-cell">phonetic</div>
             <div className="dict-table-cell">{genData.phonetic}</div>
           </div>
-          <div key={getKey()} className="dict-table-row">
+          <div key={getUniqueKey()} className="dict-table-row">
             <div className="dict-table-cell">origin</div>
             <div className="dict-table-cell">{genData.origin}</div>
           </div>
-          <div key={getKey()} className="dict-table-row">
+          <div key={getUniqueKey()} className="dict-table-row">
             <div className="dict-table-cell">text</div>
             <div className="dict-table-cell">{genData.text}</div>
           </div>
-          <div key={getKey()} className="dict-table-row">
+          <div key={getUniqueKey()} className="dict-table-row">
             <div className="dict-table-cell">audio</div>
             <div className="dict-table-cell">{genData.audio}</div>
           </div>
@@ -108,7 +105,7 @@ const DictResult = ({ word, callbackLookup }) => {
       console.log('keyx: ' + meanings.partOfSpeech + ind1 + ind2)
 
       reactElements.push(
-        <div key={getKey()} className="dict-table" style={{ marginBottom: '20px' }}>
+        <div key={getUniqueKey()} className="dict-table" style={{ marginBottom: '20px' }}>
           <div className="dict-table-body">
             <div className="dict-table-row">
               <div className="dict-table-cell"><b>definition {ind2 + 1}</b></div>
@@ -127,7 +124,7 @@ const DictResult = ({ word, callbackLookup }) => {
                       console.log('s is: ', s);
                       console.log('s when split is: ', s.split(' '));
                       return (
-                        <li key={getKey()}>
+                        <li key={getUniqueKey()}>
                           {
                             s.split(' ').map((oneWordInS) => {
                               return (
@@ -159,7 +156,7 @@ const DictResult = ({ word, callbackLookup }) => {
                       console.log('a is: ', a);
                       console.log('a when split is: ', a.split(' '));
                       return (
-                        <li key={getKey()}>
+                        <li key={getUniqueKey()}>
                           {
                             a.split(' ').map((oneWordInA) => {
                               return (

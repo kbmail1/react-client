@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './Hangman.scss'
 import fallbackList, { wordApiUrl } from './FallbackList'
 import axios from 'axios'
+import { getUniqueKey } from '../common/utils'
 // <caption>&#x2639;</caption>
 
 const Hangman = () => {
@@ -88,7 +89,7 @@ const Hangman = () => {
     const rowElems: JSX.Element[] = []
     alphasArray[rowInd].split('').map((letter) => {
       rowElems.push(
-        <td className='hangman__alpha'>
+        <td key={getUniqueKey()} className='hangman__alpha'>
           <input type="button" onClick={letterClicked} value={letter} />
         </td>)
     })
