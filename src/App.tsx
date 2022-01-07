@@ -8,13 +8,13 @@ import {
   Navigate,
   Outlet
 } from 'react-router-dom';
-import { fakeAuthProvider } from './auth'
 import Dictionary from './dict/Dictionary';
 import About from './About'
 import PublicPage from './PublicPage'
 import PWA from './PWA';
 import Hangman from './hangman/Hangman';
 import Header from './common/Header'
+import { fakeAuthProvider } from './auth'
 
 export default function App() {
   return (

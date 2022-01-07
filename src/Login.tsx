@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import Banner, * as banner from './common/Banner'
 import './Login.scss'
 import axios from 'axios'
+import { fakeAuthProvider } from './auth'
 
 // === React Component ===
 const Login = (props) => {
@@ -20,6 +21,23 @@ const Login = (props) => {
     console.log('login: handleChange: now creds are: creds: ', creds)
   }
 
+  const newSubmit = (event: React.FormEvent<HTMLFormElement>) {
+      event.preventDefault();
+  
+      // let formData = new FormData(event.currentTarget);
+      // let username = formData.get("username") as string;
+  
+      auth.signIn(username, () => {
+        // Send them back to the page they tried to visit when they were
+        // redirected to the login page. Use { replace: true } so we don't create
+        // another entry in the history stack for the login page.  This means that
+        // when they get to the protected page and click the back button, they
+        // won't end up back on the login page, which is also really nice for the
+        // user experience.
+        navigate(from, { replace: true });
+      });
+    }
+  }
   const handleSubmit = () => {
     console.log(`In Handle Submit: login: userid: ${creds.userid} and password: ${creds.password}`)
     // login
