@@ -11,9 +11,11 @@ const Header = (props) => {
   return (
     <header>
       <div className="header-title">Meander Inc.</div>
-      <div className="header-menu">
-        <MenuOnTop perms={perms} />
-      </div>
+      {
+        <div className="header-menu">
+          <MenuOnTop perms={perms} />
+        </div>
+      }
     </header>
   )
 }
