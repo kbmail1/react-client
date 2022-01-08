@@ -1,9 +1,8 @@
-
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  justify-items: flex-start;
-  align-items: center;
-  margin: auto;
+body {
+  background-color: gray !important;
+}
+.layout-menu {
+  display:flex;
+  list-style-type: none;
+  justify-content: space-evenly;
 }

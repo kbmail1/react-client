@@ -14,6 +14,7 @@ import PWA from './PWA';
 import Hangman from './hangman/Hangman';
 import Header from './common/Header'
 import { fakeAuthProvider } from './auth'
+import './App.scss'
 
 interface AuthContextType {
   user: any;
@@ -51,8 +52,8 @@ export default function App() {
 
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Dictionary />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<About />} />
+          <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/login" element={<LoginPage />} />
 
         <Route path="/pwa" element={
@@ -82,17 +83,17 @@ function Layout() {
     <div>
       <AuthStatus />
 
-      <ul>
-        <li>
-          <Link to="/">Dictionary</Link>
+      <ul className="layout-menu">
+        <li className="layout-menu__item">
+          <Link to="/">About</Link>
         </li>
-        <li>
-          <Link to="/about">About</Link>
+        <li className="layout-menu__item">
+          <Link to="/dictionary">Dictionary</Link>
         </li>
-        <li>
+        <li className="layout-menu__item">
           <Link to="/pwa">PWA Page</Link>
         </li>
-        <li>
+        <li className="layout-menu__item">
           <Link to="/hangman">Hangman page</Link>
         </li>
       </ul >
