@@ -17,8 +17,9 @@ import { fakeAuthProvider } from './auth'
 import './App.scss'
 
 interface AuthContextType {
+  email: any;
   user: any;
-  signIn: (user: string, callback: VoidFunction) => void;
+  signIn: (email: string, password: string, user: string, callback: VoidFunction) => void;
   signOut: (callback: VoidFunction) => void;
 }
 let AuthContext = React.createContext<AuthContextType>(null!);
@@ -26,10 +27,11 @@ let AuthContext = React.createContext<AuthContextType>(null!);
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   let [user, setUser] = React.useState<any>(null);
+  let [email, setEmail] = React.useState<any>(null);
 
-  let signIn = (newUser: string, callback: VoidFunction) => {
-    return fakeAuthProvider.signIn(() => {
-      setUser(newUser);
+  let signIn = (email: string, password: string, user: string, callback: VoidFunction) => {
+    return fakeAuthProvider.signIn(email, password, user, () => {
+      setUser(user);
       callback();
     });
   };
@@ -37,11 +39,12 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   let signOut = (callback: VoidFunction) => {
     return fakeAuthProvider.signOut(() => {
       setUser(null);
+      setEmail(null)
       callback();
     });
   };
 
-  let value = { user, signIn, signOut };
+  let value = { email, user, signIn, signOut };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -63,7 +66,6 @@ export default function App() {
             }
           />
 
-
         <Route path="/hangman" element={
               <RequireAuth>
                 <Hangman />
@@ -71,7 +73,6 @@ export default function App() {
             }
           />
         </Route>
-
 
       </Routes>
     </AuthProvider>
@@ -102,7 +103,6 @@ function Layout() {
     </div >
   );
 }
-
 
 function AuthStatus() {
   let auth = React.useContext(AuthContext);
@@ -152,9 +152,11 @@ function LoginPage() {
     event.preventDefault();
 
     let formData = new FormData(event.currentTarget);
+    let email = formData.get("email") as string;
+    let password = formData.get("password") as string;
     let username = formData.get("username") as string;
 
-    auth.signIn(username, () => {
+    auth.signIn(email, password, username, () => {
       // Send them back to the page they tried to visit when they were
       // redirected to the login page. Use { replace: true } so we don't create
       // another entry in the history stack for the login page.  This means that
@@ -170,6 +172,12 @@ function LoginPage() {
       <p>You must log in to view the page at {from}</p>
 
       <form onSubmit={handleSubmit}>
+        <label>
+          Email: <input name="email" type="text" />
+        </label>{" "}
+        <label>
+          Password: <input type="password" name="username" />
+        </label>{" "}
         <label>
           Username: <input name="username" type="text" />
         </label>{" "}

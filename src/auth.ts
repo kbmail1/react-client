@@ -1,6 +1,6 @@
  const fakeAuthProvider = {
   isAuthenticated: false,
-  signIn(callback: VoidFunction) {
+  signIn(email, password, username, callback: VoidFunction) {
     fakeAuthProvider.isAuthenticated = true;
     setTimeout(callback, 100); // fake async
   },
