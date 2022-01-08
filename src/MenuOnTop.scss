@@ -1,0 +1,25 @@
+.menuontop {
+  width: 100%;
+  &__list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 50px;
+    background-color: white;
+
+    &__item {
+      padding-right: 20px;
+      text-decoration: none;
+      text-transform: none;
+      a {
+        text-decoration: none;
+        text-transform: none;
+
+        &:visited, &hover {
+          color: #367588;
+      }
+    }
+    }
+  }
+}

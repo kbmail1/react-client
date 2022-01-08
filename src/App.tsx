@@ -10,51 +10,50 @@ import {
 } from 'react-router-dom';
 import Dictionary from './dict/Dictionary';
 import About from './About'
-import PublicPage from './PublicPage'
 import PWA from './PWA';
 import Hangman from './hangman/Hangman';
 import Header from './common/Header'
 import { fakeAuthProvider } from './auth'
 
+interface AuthContextType {
+  user: any;
+  signIn: (user: string, callback: VoidFunction) => void;
+  signOut: (callback: VoidFunction) => void;
+}
+let AuthContext = React.createContext<AuthContextType>(null!);
+
+
+function AuthProvider({ children }: { children: React.ReactNode }) {
+  let [user, setUser] = React.useState<any>(null);
+
+  let signIn = (newUser: string, callback: VoidFunction) => {
+    return fakeAuthProvider.signIn(() => {
+      setUser(newUser);
+      callback();
+    });
+  };
+
+  let signOut = (callback: VoidFunction) => {
+    return fakeAuthProvider.signOut(() => {
+      setUser(null);
+      callback();
+    });
+  };
+
+  let value = { user, signIn, signOut };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
 export default function App() {
   return (
     <AuthProvider>
-      <Header />
-      <h1>Auth Example</h1>
-
-      <p>
-        This example demonstrates a simple login flow with three pages: a public
-        page, a protected page, and a login page. In order to see the protected
-        page, you must first login. Pretty standard stuff.
-      </p>
-
-      <p>
-        First, visit the public page. Then, visit the protected page. You're not
-        yet logged in, so you are redirected to the login page. After you login,
-        you are redirected back to the protected page.
-      </p>
-
-      <p>
-        Notice the URL change each time. If you click the back button at this
-        point, would you expect to go back to the login page? No! You're already
-        logged in. Try it out, and you'll see you go back to the page you
-        visited just *before* logging in, the public page.
-      </p>
 
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Dictionary />} />
           <Route path="/about" element={<About />} />
-          <Route path="/public" element={<PublicPage />} />
           <Route path="/login" element={<LoginPage />} />
-
-          <Route path="/protected" element={
-              <RequireAuth>
-                <ProtectedPage />
-              </RequireAuth>
-            }
-          />
-
 
         <Route path="/pwa" element={
               <RequireAuth>
@@ -91,12 +90,6 @@ function Layout() {
           <Link to="/about">About</Link>
         </li>
         <li>
-          <Link to="/public">public</Link>
-        </li>
-        <li>
-          <Link to="/protected">Protected Page</Link>
-        </li>
-        <li>
           <Link to="/pwa">PWA Page</Link>
         </li>
         <li>
@@ -109,42 +102,9 @@ function Layout() {
   );
 }
 
-interface AuthContextType {
-  user: any;
-  signIn: (user: string, callback: VoidFunction) => void;
-  signOut: (callback: VoidFunction) => void;
-}
-
-let AuthContext = React.createContext<AuthContextType>(null!);
-
-function AuthProvider({ children }: { children: React.ReactNode }) {
-  let [user, setUser] = React.useState<any>(null);
-
-  let signIn = (newUser: string, callback: VoidFunction) => {
-    return fakeAuthProvider.signIn(() => {
-      setUser(newUser);
-      callback();
-    });
-  };
-
-  let signOut = (callback: VoidFunction) => {
-    return fakeAuthProvider.signOut(() => {
-      setUser(null);
-      callback();
-    });
-  };
-
-  let value = { user, signIn, signOut };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-function useAuth() {
-  return React.useContext(AuthContext);
-}
 
 function AuthStatus() {
-  let auth = useAuth();
+  let auth = React.useContext(AuthContext);
   let navigate = useNavigate();
 
   if (!auth.user) {
@@ -166,7 +126,7 @@ function AuthStatus() {
 }
 
 function RequireAuth({ children }: { children: JSX.Element }) {
-  let auth = useAuth();
+  let auth = React.useContext(AuthContext);
   let location = useLocation();
 
   if (!auth.user) {
@@ -182,7 +142,7 @@ function RequireAuth({ children }: { children: JSX.Element }) {
 function LoginPage() {
   let navigate = useNavigate();
   let location = useLocation();
-  let auth = useAuth();
+  let auth = React.useContext(AuthContext);
 
   let from = location.state?.from?.pathname || "/";
   console.log(`LoginPage: from: ${from}`)
@@ -216,9 +176,4 @@ function LoginPage() {
       </form>
     </div>
   );
-}
-
-
-function ProtectedPage() {
-  return <h3>Protected</h3>;
 }

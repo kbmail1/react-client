@@ -1,0 +1,105 @@
+
+
+$btn-blue-bg: #3498db;
+$input-bg: #ecf0f1;
+$input-hover-bg: #acd0d1;
+$border-color: #2980b9;
+$teal-blue: #367588;
+$btn-hover-bg: $teal-blue;
+
+ul.login-form {
+  list-style: none;
+  padding: 10px;
+  width: auto;
+  min-width: 350px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-items: space-around;
+  align-items: flex-end;
+  transform: translate(-50%, -50%);
+
+  border: 1px solid gray;
+  overflow: auto;
+
+  li {
+    width: auto; // NOTE: width 100% didn't work - makes harder for ppsition login header and submit button to align right or left.
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    float: right;
+    padding: 5px;
+
+    &:first-child,
+    &:last-child {
+      align-self: center;
+    }
+
+    &:first-child h2 {
+      text-transform: capitalize;
+    }
+  }
+}
+
+
+label {
+  font-family: monospace;
+  font-size: smaller;
+}
+
+input[type='text'],
+input[type='password'] {
+  padding: 5px 5px;
+  margin: 5px;
+  background-color: $input-bg;
+  width: 200px;
+  display: inline-block;
+
+  &:focus {
+    color: #367588;
+  }
+  &:hover {
+    background-color: $input-hover-bg;
+  }
+}
+
+li > input:hover {
+  transition: all 0.2s ease-in-out;
+}
+
+li > input:active {
+  transition: all 1s ease-out;
+  background: white;
+}
+
+.required::after {
+  content: '*';
+  font-variant-position: super;
+  position: relative;
+  top: -0.4rem;
+  color: red;
+}
+
+button {
+  background: $btn-blue-bg;
+  width: 125px;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: transparent;
+    box-shadow: none;
+    background: $btn-hover-bg;
+    transition: background 0.5s;
+    color: white;
+    transition: color 0.5s;
+  }
+}
+
+.btn:hover {
+  background: #2cc06b;
+}
