@@ -25,7 +25,7 @@ interface AuthContextType {
 let AuthContext = React.createContext<AuthContextType>(null!);
 
 
-function AuthProvider({ children }: { children: React.ReactNode }) {
+const AuthProvider = () => {
   let [user, setUser] = React.useState<any>(null);
   let [email, setEmail] = React.useState<any>(null);
 
@@ -44,14 +44,12 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
-  let value = { email, user, signIn, signOut };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return { email, user, signIn, signOut };
 }
 
 export default function App() {
   return (
-    <AuthProvider>
+    <AuthContext.Provider value={AuthProvider()}>
 
       <Routes>
         <Route element={<Layout />}>
@@ -75,11 +73,13 @@ export default function App() {
         </Route>
 
       </Routes>
-    </AuthProvider>
+    </AuthContext.Provider>
   );
 }
 
 function Layout() {
+  let auth = React.useContext(AuthContext);
+
   return (
     <div>
       <AuthStatus />
@@ -96,6 +96,10 @@ function Layout() {
         </li>
         <li className="layout-menu__item">
           <Link to="/hangman">Hangman page</Link>
+        </li>
+        <li className="layout-menu__item">
+          { /* auth.signOut(() => navigate("/")); */}
+          <Link className={`${auth.user ? "" : "display-none"}`} to="/">x{auth.user}x</Link>
         </li>
       </ul >
 
@@ -163,7 +167,7 @@ function LoginPage() {
       // when they get to the protected page and click the back button, they
       // won't end up back on the login page, which is also really nice for the
       // user experience.
-      navigate(from, { replace: true });
+        navigate(from, { replace: true });
     });
   }
 
@@ -174,13 +178,13 @@ function LoginPage() {
       <form onSubmit={handleSubmit}>
         <label>
           Email: <input name="email" type="text" />
-        </label>{" "}
+        </label>{" "}<br/>
         <label>
-          Password: <input type="password" name="username" />
-        </label>{" "}
+          Username: <input type="text" name="username" />
+        </label>{" "}<br/>
         <label>
-          Username: <input name="username" type="text" />
-        </label>{" "}
+          Password: <input name="username" type="password" />
+        </label>{" "}<br/>
         <button type="submit">Login</button>
       </form>
     </div>
