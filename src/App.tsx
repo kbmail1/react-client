@@ -12,39 +12,55 @@ import Dictionary from './dict/Dictionary';
 import About from './About'
 import PWA from './PWA';
 import Hangman from './hangman/Hangman';
+import TestJWT from './TestJWT'
 import Header from './common/Header'
 import './App.scss'
+import axios from 'axios';
 
 interface AuthContextType {
   email: any;
-  user: any;
-  signIn: (email: string, password: string, user: string, callback: VoidFunction) => void;
+  username: any;
+  signIn: (email: string, password: string, username: string, callback: VoidFunction) => void;
   signOut: (callback: VoidFunction) => void;
 }
 let AuthContext = React.createContext<AuthContextType>(null!);
 
+const restUrl = `https://localhost:8888/login`
 
 const AuthProvider = () => {
-  let [user, setUser] = React.useState<any>(null);
-  let [email, setEmail] = React.useState<any>(null);
+  let [username, setUsername] = React.useState('')
+  let [email, setEmail] = React.useState('')
 
-  let signIn = (email: string, password: string, user: string, callback: VoidFunction) => {
-      setUser(user);
-      setTimeout(callback, 100)
-    // });
-  };
+  let signIn = (email: string, password: string, username: string, callback: VoidFunction) => {
+    console.log('in this signin - ')
+    axios.post(restUrl, {
+      email,
+      username,
+      password,
+    })
+      .then((res) => {
+        console.log(`looks good: ***', ${res}`)
+        console.log(`response.data: ${res.data}`)
+        alert ( 'looks good: ***' + 'response.data' + JSON.stringify(res.data, null, 2))
+        // if token - store in localstorage.  reuse in next request.
+        localStorage.setItem('jwt_token', res.data.token)
+        setUsername(username)
+        callback()
+      })
+      .catch((err) => {
+        console.log('error ', err)
+      })
+  }
 
   let signOut = (callback: VoidFunction) => {
-      setUser(null);
-      setEmail(null)
-      setTimeout(callback, 100)
-    // });
+    setUsername('')
+    setTimeout(callback, 100)
   };
 
-  return { email, user, signIn, signOut };
+  return { email, username, signIn, signOut }
 }
 
-export default function App() {
+const App = () => {
   return (
     <AuthContext.Provider value={AuthProvider()}>
 
@@ -54,18 +70,25 @@ export default function App() {
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/login" element={<LoginPage />} />
 
-        <Route path="/pwa" element={
-              <RequireAuth>
-                <PWA />
-              </RequireAuth>
-            }
+          <Route path="/pwa" element={
+            <RequireAuth>
+              <PWA />
+            </RequireAuth>
+          }
           />
 
-        <Route path="/hangman" element={
-              <RequireAuth>
-                <Hangman />
-              </RequireAuth>
-            }
+          <Route path="/testjwt" element={
+            <RequireAuth>
+              <TestJWT />
+            </RequireAuth>
+          }
+          />
+
+          <Route path="/hangman" element={
+            <RequireAuth>
+              <Hangman />
+            </RequireAuth>
+          }
           />
         </Route>
 
@@ -89,10 +112,13 @@ function Layout() {
           <Link to="/dictionary">Dictionary</Link>
         </li>
         <li className="layout-menu__item">
-          <Link to="/pwa">PWA Page</Link>
+          <Link to="/pwa">PWA</Link>
         </li>
         <li className="layout-menu__item">
-          <Link to="/hangman">Hangman page</Link>
+          <Link to="/hangman">Hangman</Link>
+        </li>
+        <li className="layout-menu__item">
+          <Link to="/testjwt">TestJWT</Link>
         </li>
       </ul >
 
@@ -105,13 +131,13 @@ function AuthStatus() {
   let auth = React.useContext(AuthContext);
   let navigate = useNavigate();
 
-  if (!auth.user) {
+  if (!auth.username) {
     return <p>You are not logged in.</p>;
   }
 
   return (
     <p>
-      Welcome {auth.user}!{" "}
+      Welcome {auth.username}!{" "}
       <button
         onClick={() => {
           auth.signOut(() => navigate("/"));
@@ -127,10 +153,10 @@ function RequireAuth({ children }: { children: JSX.Element }) {
   let auth = React.useContext(AuthContext);
   let location = useLocation();
 
-  if (!auth.user) {
+  if (!auth.username) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
-    // along to that page after they login, which is a nicer user experience
+    // along to that page after they login, which is a nicer username experience
     // than dropping them off on the home page.
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
@@ -150,17 +176,20 @@ function LoginPage() {
 
     let formData = new FormData(event.currentTarget);
     let email = formData.get("email") as string;
-    let password = formData.get("password") as string;
     let username = formData.get("username") as string;
+    let password = formData.get("password") as string;
 
     auth.signIn(email, password, username, () => {
+      console.log(`submitting form`)
       // Send them back to the page they tried to visit when they were
       // redirected to the login page. Use { replace: true } so we don't create
       // another entry in the history stack for the login page.  This means that
       // when they get to the protected page and click the back button, they
       // won't end up back on the login page, which is also really nice for the
       // user experience.
-        navigate(from, { replace: true });
+
+      console.log('just before navigate in signIn')
+      navigate(from, { replace: true });
     });
   }
 
@@ -171,15 +200,17 @@ function LoginPage() {
       <form onSubmit={handleSubmit}>
         <label>
           Email: <input name="email" type="text" />
-        </label>{" "}<br/>
+        </label>{" "}<br />
         <label>
-          Username: <input type="text" name="username" />
-        </label>{" "}<br/>
+          Username: <input name="username" type="text" />
+        </label>{" "}<br />
         <label>
-          Password: <input name="username" type="password" />
-        </label>{" "}<br/>
+          Password: <input name="password" type="password" />
+        </label>{" "}<br />
         <button type="submit">Login</button>
       </form>
     </div>
   );
 }
+
+export default App
