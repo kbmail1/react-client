@@ -13,7 +13,6 @@ import About from './About'
 import PWA from './PWA';
 import Hangman from './hangman/Hangman';
 import Header from './common/Header'
-import { fakeAuthProvider } from './auth'
 import './App.scss'
 
 interface AuthContextType {
@@ -30,18 +29,16 @@ const AuthProvider = () => {
   let [email, setEmail] = React.useState<any>(null);
 
   let signIn = (email: string, password: string, user: string, callback: VoidFunction) => {
-    return fakeAuthProvider.signIn(email, password, user, () => {
       setUser(user);
-      callback();
-    });
+      setTimeout(callback, 100)
+    // });
   };
 
   let signOut = (callback: VoidFunction) => {
-    return fakeAuthProvider.signOut(() => {
       setUser(null);
       setEmail(null)
-      callback();
-    });
+      setTimeout(callback, 100)
+    // });
   };
 
   return { email, user, signIn, signOut };
@@ -96,10 +93,6 @@ function Layout() {
         </li>
         <li className="layout-menu__item">
           <Link to="/hangman">Hangman page</Link>
-        </li>
-        <li className="layout-menu__item">
-          { /* auth.signOut(() => navigate("/")); */}
-          <Link className={`${auth.user ? "" : "display-none"}`} to="/">x{auth.user}x</Link>
         </li>
       </ul >
 

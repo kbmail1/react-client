@@ -93,7 +93,7 @@ const Hangman = () => {
           <input type="button" onClick={letterClicked} value={letter} />
         </td>)
     })
-    alphasElems.push(<tr>{rowElems}</tr>)
+    alphasElems.push(<tr key={getUniqueKey()}>{rowElems}</tr>)
   }
 
 
@@ -102,7 +102,7 @@ const Hangman = () => {
   // https://www.carlrippon.com/repeat-element-n-times-in-jsx/ (no below in JSX directly)
   const invalidElems: JSX.Element[] = []
   for (let i = 0; i < status.invalidWordToDisplay.length; i++) {
-    invalidElems.push(<td className='hangman__alpha__invalid'>{status.invalidWordToDisplay.charAt(i)}</td>)
+    invalidElems.push(<td key={getUniqueKey()} className='hangman__alpha__invalid'>{status.invalidWordToDisplay.charAt(i)}</td>)
   }
 
   const validElems: JSX.Element[] = []
