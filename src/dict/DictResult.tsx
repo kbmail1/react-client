@@ -3,6 +3,7 @@ import { useQuery, gql } from '@apollo/client'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { getUniqueKey } from '../common/utils'
+import DictResultGeneral from './DicResultGeneral'
 
 const DictResult = ({ word, callbackLookup }) => {
   const [genData, setGenData] = useState({
@@ -67,37 +68,7 @@ const DictResult = ({ word, callbackLookup }) => {
 
   // console.log(`three.2: ${JSON.stringify(details, null, 2)}`)
 
-  const generalInfo =
-    <>
-      <h2>General Information</h2>
-      <div className="dict-table">
-        <div className="dict-table-body">
-
-          <div key={getUniqueKey()} className="dict-table-row">
-            <div className="dict-table-cell">word</div>
-            <div className="dict-table-cell">{genData.word}</div>
-          </div>
-          <div key={getUniqueKey()} className="dict-table-row">
-            <div className="dict-table-cell">phonetic</div>
-            <div className="dict-table-cell">{genData.phonetic}</div>
-          </div>
-          <div key={getUniqueKey()} className="dict-table-row">
-            <div className="dict-table-cell">origin</div>
-            <div className="dict-table-cell">{genData.origin}</div>
-          </div>
-          <div key={getUniqueKey()} className="dict-table-row">
-            <div className="dict-table-cell">text</div>
-            <div className="dict-table-cell">{genData.text}</div>
-          </div>
-          <div key={getUniqueKey()} className="dict-table-row">
-            <div className="dict-table-cell">audio</div>
-            <div className="dict-table-cell">{genData.audio}</div>
-          </div>
-        </div>
-      </div>
-    </>
-
-  let reactElements = [generalInfo]
+  let reactElements: React.ReactElement[]  = []
   details.map((meanings, ind1) => {
     reactElements.push(<h2>{meanings.partOfSpeech}(s)</h2>)
     meanings.definitions.map((def, ind2) => {
@@ -192,6 +163,7 @@ const DictResult = ({ word, callbackLookup }) => {
 
   return (
     <div className='dict-table-container'>
+      <DictResultGeneral genData={genData}  />
       {[...reactElements]}
     </div>
   )
