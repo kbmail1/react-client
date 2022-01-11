@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { getUniqueKey } from '../common/utils'
 import DictResultGeneral from './DicResultGeneral'
+import DictResultRelatedWords from './DictResultRelatedWords'
 
 const DictResult = ({ word, callbackLookup }) => {
   const [genData, setGenData] = useState({
@@ -90,29 +91,11 @@ const DictResult = ({ word, callbackLookup }) => {
               <div className="dict-table-cell">
                 <ul style={{ listStyle: 'none' }}>
                   {
-                    def.synonyms.map((s) => {
-                      console.log('s is: ', s);
-                      console.log('s when split is: ', s.split(' '));
+                    def.synonyms.map((phrase) => {
+                      console.log('phrase is: ', phrase);
+                      console.log('phrase when split is: ', phrase.split(' '));
                       return (
-                        <li key={getUniqueKey()}>
-                          {
-                            s.split(' ').map((oneWordInS) => {
-                              return (
-                                <>
-                                  <span>
-                                    <button
-                                      style={{ background: 'none', border: '0', borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
-                                      onClick={() => callbackLookup(oneWordInS)}
-                                    >
-                                      {oneWordInS}
-                                    </button>
-                                  </span>
-                                  &nbsp;
-                                </>
-                              )
-                            })
-                          }
-                        </li>
+                        <DictResultRelatedWords phrase={phrase} callback={callbackLookup} />
                       )
                     })
                   }
@@ -125,29 +108,11 @@ const DictResult = ({ word, callbackLookup }) => {
                 <ul style={{ listStyle: 'none' }}>
 
                   {
-                    def.antonyms.map((a) => {
-                      console.log('a is: ', a);
-                      console.log('a when split is: ', a.split(' '));
+                    def.antonyms.map((phrase) => {
+                      console.log('phrase is: ', phrase);
+                      console.log('phrase when split is: ', phrase.split(' '));
                       return (
-                        <li key={getUniqueKey()}>
-                          {
-                            a.split(' ').map((oneWordInA) => {
-                              return (
-                                <>
-                                  <span>
-                                    <button
-                                      style={{ background: 'none', border: '0', borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
-                                      onClick={() => callbackLookup(oneWordInA)}
-                                    >
-                                      {oneWordInA}
-                                    </button>
-                                  </span>
-                                  &nbsp;
-                                </>
-                              )
-                            })
-                          }
-                        </li>
+                        <DictResultRelatedWords phrase={phrase} callback={callbackLookup} />
                       )
                     })
                   }

@@ -11,6 +11,7 @@ const DictResultRelatedWords = (props) => {
     <li key={getUniqueKey()}>
       {
         props.phrase.split(' ').map((oneWordInS) => {
+          return (
           <>
             <span>
               <button
@@ -22,6 +23,7 @@ const DictResultRelatedWords = (props) => {
             </span>
             &nbsp;
           </>
+          )
         })
       }
     </li>
