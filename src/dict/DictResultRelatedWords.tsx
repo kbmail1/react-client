@@ -17,7 +17,7 @@ const DictResultRelatedWords = (props) => {
             return (
               <li key={getUniqueKey()}>
                 {
-                  props.phrase.split(' ').map((oneWordInS) => {
+                  phrase.split(' ').map((oneWordInS) => {
                     return (
                       <>
                         <span>
@@ -40,5 +40,6 @@ const DictResultRelatedWords = (props) => {
       </ul>
     </div>
   )
+}
 
-  export default DictResultRelatedWords
+export default DictResultRelatedWords

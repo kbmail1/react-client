@@ -88,37 +88,11 @@ const DictResult = ({ word, callbackLookup }) => {
             </div>
             <div className="dict-table-row">
               <div className="dict-table-cell">synonyms</div>
-              <div className="dict-table-cell">
-                <ul style={{ listStyle: 'none' }}>
-                  {
-                    def.synonyms.map((phrase) => {
-                      console.log('phrase is: ', phrase);
-                      console.log('phrase when split is: ', phrase.split(' '));
-                      return (
-                        <DictResultRelatedWords phrase={phrase} callback={callbackLookup} />
-                      )
-                    })
-                  }
-                </ul>
-              </div>
+              <DictResultRelatedWords relatedWords={def.synonyms} callback={callbackLookup} />
             </div>
             <div className="dict-table-row">
               <div className="dict-table-cell">antonyms</div>
-              <div className="dict-table-cell">
-                <ul style={{ listStyle: 'none' }}>
-
-                  {
-                    def.antonyms.map((phrase) => {
-                      console.log('phrase is: ', phrase);
-                      console.log('phrase when split is: ', phrase.split(' '));
-                      return (
-                        <DictResultRelatedWords phrase={phrase} callback={callbackLookup} />
-                      )
-                    })
-                  }
-
-                </ul>
-              </div>
+              <DictResultRelatedWords relatedWords={def.antonyms} callback={callbackLookup} />
             </div>
           </div>
         </div>
