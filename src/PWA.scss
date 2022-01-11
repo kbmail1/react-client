@@ -1,0 +1,50 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 0;
+  margin: 0;
+  background-color: white;
+  padding: 0;
+  width: 80%;
+  margin: auto;
+  max-width: 26rem !important;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  text-align: center;
+  font-size: 1rem;
+
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  /*
+
+  // TODO: stack-overflow - add link when recollect...
+  display: inline-block;
+  height: 0;
+  padding-bottom: 50%;
+  width: 50%;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  max-width: 2rem;
+  */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around
+}
+
+.orange {
+  color: orange;
+  text-transform: uppercase;
+}
+.blue {
+  color: blue;
+  text-transform: uppercase;
+}

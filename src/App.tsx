@@ -69,13 +69,7 @@ const App = () => {
           <Route path="/" element={<About />} />
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/login" element={<LoginPage />} />
-
-          <Route path="/pwa" element={
-            <RequireAuth>
-              <PWA />
-            </RequireAuth>
-          }
-          />
+          <Route path="/pwa" element={<PWA />} />
 
           <Route path="/testjwt" element={
             <RequireAuth>
