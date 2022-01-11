@@ -41,7 +41,7 @@ const AuthProvider = () => {
       .then((res) => {
         console.log(`looks good: ***', ${res}`)
         console.log(`response.data: ${res.data}`)
-        alert ( 'looks good: ***' + 'response.data' + JSON.stringify(res.data, null, 2))
+        alert('looks good: ***' + 'response.data' + JSON.stringify(res.data, null, 2))
         // if token - store in localstorage.  reuse in next request.
         localStorage.setItem('jwt_token', res.data.token)
         setUsername(username)
@@ -93,6 +93,7 @@ const App = () => {
 
 function Layout() {
   let auth = React.useContext(AuthContext);
+  let navigate = useNavigate();
 
   return (
     <div>
@@ -114,6 +115,20 @@ function Layout() {
         <li className="layout-menu__item">
           <Link to="/testjwt">TestJWT</Link>
         </li>
+
+        {
+          auth.username && 
+          <li className="layout-menu__item">
+            <button
+              onClick={() => {
+                auth.signOut(() => navigate("/"));
+              }}
+            >
+              Sign out
+            </button>
+          </li>
+        }
+
       </ul >
 
       <Outlet />
