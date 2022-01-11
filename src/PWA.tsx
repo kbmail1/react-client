@@ -3,17 +3,8 @@
 import process from 'process'
 import React from 'react'
 import { getUniqueKey } from './common/utils'
+import { grid } from './pwaState'
 import './PWA.scss'
-
-const grid = {
-  // Only Squares.
-  rows: Number(process.env.PWA_ROWS) || 10,
-  cols: Number(process.env.PWA_COLS) || 10,
-}
-
-export const GridContext = React.createContext({
-  grid,
-})
 
 const PWA = () => {
   const arr = Array(grid.rows * grid.cols).fill(<div>&nbsp;</div>)
@@ -28,11 +19,6 @@ const PWA = () => {
     const row = id % grid.rows
     const col = Math.floor(id / grid.cols)
     return [row, col]
-  })
-
-  const placeLetterOnRowcol = ((row: number, col: number, letter: string) => {
-    console.log(letter)
-    const id = Number(rowcol2Id(row, col))
   })
 
   const placeWord = ((word: string, row: number, col: number, axis: string) => {
@@ -67,7 +53,7 @@ const PWA = () => {
   })
 
   return (
-    <GridContext.Provider value={{ grid }} >
+    <>
       {arr.length}
       <div> This is &quot;PWA&quot; page </div>
       <div className="grid-container">
@@ -77,7 +63,7 @@ const PWA = () => {
           )
         })}
       </div>
-    </GridContext.Provider>
+    </>
   )
 }
 

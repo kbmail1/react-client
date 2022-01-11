@@ -98,7 +98,6 @@ const DictResult = ({ word, callbackLookup }) => {
     </>
 
   let reactElements = [generalInfo]
-  // TODO: line 131 - needs KEY prop for li.
   details.map((meanings, ind1) => {
     reactElements.push(<h2>{meanings.partOfSpeech}(s)</h2>)
     meanings.definitions.map((def, ind2) => {
@@ -128,14 +127,17 @@ const DictResult = ({ word, callbackLookup }) => {
                           {
                             s.split(' ').map((oneWordInS) => {
                               return (
-                                <span>
-                                  <button
-                                    style={{ backgroundColor: 'white', border: '0', borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
-                                    onClick={() => callbackLookup(oneWordInS)}
-                                  >
-                                    {oneWordInS}
-                                  </button>
-                                </span>
+                                <>
+                                  <span>
+                                    <button
+                                      style={{ background: 'none', border: '0', borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
+                                      onClick={() => callbackLookup(oneWordInS)}
+                                    >
+                                      {oneWordInS}
+                                    </button>
+                                  </span>
+                                  &nbsp;
+                                </>
                               )
                             })
                           }
@@ -151,7 +153,7 @@ const DictResult = ({ word, callbackLookup }) => {
               <div className="dict-table-cell">
                 <ul style={{ listStyle: 'none' }}>
 
-                {
+                  {
                     def.antonyms.map((a) => {
                       console.log('a is: ', a);
                       console.log('a when split is: ', a.split(' '));
@@ -160,14 +162,17 @@ const DictResult = ({ word, callbackLookup }) => {
                           {
                             a.split(' ').map((oneWordInA) => {
                               return (
-                                <span>
-                                  <button
-                                    style={{ backgroundColor: 'white', border: '0', borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
-                                    onClick={() => callbackLookup(oneWordInA)}
-                                  >
-                                    {oneWordInA}
-                                  </button>
-                                </span>
+                                <>
+                                  <span>
+                                    <button
+                                      style={{ background: 'none', border: '0', borderBottom: '1px solid lightgray', color: '#367588', cursor: 'pointer' }}
+                                      onClick={() => callbackLookup(oneWordInA)}
+                                    >
+                                      {oneWordInA}
+                                    </button>
+                                  </span>
+                                  &nbsp;
+                                </>
                               )
                             })
                           }
