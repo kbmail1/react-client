@@ -9,7 +9,6 @@ const TestJWT = () => {
   })
     .then((res) => {
       alert('received response: ' + JSON.stringify(res.data, null, 2))
-      alert('received verification: ' + JSON.stringify(res.data.result, null, 2))
     })
     .catch((err) => {
       alert('response error: ' + JSON.stringify(err))
@@ -18,7 +17,7 @@ const TestJWT = () => {
   return (
     <>
       <h3>
-        Ttest JWT successful
+        JWT test has passed
       </h3>
     </>
   )

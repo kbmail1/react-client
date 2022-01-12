@@ -5,7 +5,7 @@ import axios from 'axios'
 import { fakeAuthProvider } from './auth'
 import { AuthContext } from './App'
 import { useNavigate, useLocation, } from 'react-router-dom';
-import crypto from 'crypto'
+import * as crypto from 'crypto'
 
 // === React Comjiponent ===
 function LoginPage() {

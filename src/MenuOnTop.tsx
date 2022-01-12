@@ -16,7 +16,7 @@ const MenuOnTop = () => {
           { } |  &nbsp; &nbsp;
         </li>
         <li className="menuontop__list__item">
-          <Link to="/pwa">{ }PWA{ }</Link> </li>
+          <Link to="/crossword">{ }Crossword{ }</Link> </li>
         <li>
           { } |  &nbsp; &nbsp;
         </li>

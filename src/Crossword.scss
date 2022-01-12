@@ -11,6 +11,11 @@
   width: 80%;
   margin: auto;
   max-width: 26rem !important;
+
+  margin-top: 30px;
+  padding: 10px;
+  border-left: 1px solid red;
+  border-top: 1px solid red;
 }
 
 .grid-container > div {
@@ -24,8 +29,9 @@
   padding: 0;
   width: 2.5rem;
   height: 2.5rem;
-  /*
 
+
+  /*
   // TODO: stack-overflow - add link when recollect...
   display: inline-block;
   height: 0;
@@ -40,10 +46,12 @@
 
   display: flex;
   align-items: center;
-  justify-content: space-around
+  justify-content: space-around;
 }
 
 .red {
-  color: red;
+  color: darkred;
+  background-color: white;
   text-transform: uppercase;
+  font-weight: bold;
 }

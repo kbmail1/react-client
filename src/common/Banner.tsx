@@ -3,6 +3,7 @@ import { InternalSymbolName } from 'typescript';
 import './Banner.scss'
 
 const Banner = (props) => {
+
   const [secondsLeft, setSecondsLeft] = useState(props.config.totalDuration)
 
   let intervalHandler;

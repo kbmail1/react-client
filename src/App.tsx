@@ -10,12 +10,13 @@ import {
 } from 'react-router-dom';
 import Dictionary from './dict/Dictionary';
 import About from './About'
-import PWA from './PWA';
+import Crossword from './Crossword';
 import Hangman from './hangman/Hangman';
 import TestJWT from './TestJWT'
 import Header from './common/Header'
 import './App.scss'
 import axios from 'axios';
+// import LoginPage from './LoginPage'
 
 interface AuthContextType {
   email: any;
@@ -23,7 +24,7 @@ interface AuthContextType {
   signIn: (email: string, password: string, username: string, callback: VoidFunction) => void;
   signOut: (callback: VoidFunction) => void;
 }
-let AuthContext = React.createContext<AuthContextType>(null!);
+export const AuthContext = React.createContext<AuthContextType>(null!);
 
 const restUrl = `https://localhost:8888/login`
 
@@ -41,7 +42,6 @@ const AuthProvider = () => {
       .then((res) => {
         console.log(`looks good: ***', ${res}`)
         console.log(`response.data: ${res.data}`)
-        alert('looks good: ***' + 'response.data' + JSON.stringify(res.data, null, 2))
         // if token - store in localstorage.  reuse in next request.
         localStorage.setItem('jwt_token', res.data.token)
         setUsername(username)
@@ -69,7 +69,7 @@ const App = () => {
           <Route path="/" element={<About />} />
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/pwa" element={<PWA />} />
+          <Route path="/crossword" element={<Crossword />} />
 
           <Route path="/testjwt" element={
             <RequireAuth>
@@ -92,13 +92,12 @@ const App = () => {
 }
 
 function Layout() {
+  // if (!auth.username)  =>  guest.
   let auth = React.useContext(AuthContext);
   let navigate = useNavigate();
 
   return (
     <div>
-      <AuthStatus />
-
       <ul className="layout-menu">
         <li className="layout-menu__item">
           <Link to="/">About</Link>
@@ -107,7 +106,7 @@ function Layout() {
           <Link to="/dictionary">Dictionary</Link>
         </li>
         <li className="layout-menu__item">
-          <Link to="/pwa">PWA</Link>
+          <Link to="/crossword">Crossword</Link>
         </li>
         <li className="layout-menu__item">
           <Link to="/hangman">Hangman</Link>
@@ -117,15 +116,15 @@ function Layout() {
         </li>
 
         {
-          auth.username && 
+          auth.username &&
           <li className="layout-menu__item">
-            <button
+            <a href="javascript:;"
               onClick={() => {
                 auth.signOut(() => navigate("/"));
               }}
             >
               Sign out
-            </button>
+            </a>
           </li>
         }
 
@@ -133,28 +132,6 @@ function Layout() {
 
       <Outlet />
     </div >
-  );
-}
-
-function AuthStatus() {
-  let auth = React.useContext(AuthContext);
-  let navigate = useNavigate();
-
-  if (!auth.username) {
-    return <p>You are not logged in.</p>;
-  }
-
-  return (
-    <p>
-      Welcome {auth.username}!{" "}
-      <button
-        onClick={() => {
-          auth.signOut(() => navigate("/"));
-        }}
-      >
-        Sign out
-      </button>
-    </p>
   );
 }
 
@@ -189,14 +166,6 @@ function LoginPage() {
     let password = formData.get("password") as string;
 
     auth.signIn(email, password, username, () => {
-      console.log(`submitting form`)
-      // Send them back to the page they tried to visit when they were
-      // redirected to the login page. Use { replace: true } so we don't create
-      // another entry in the history stack for the login page.  This means that
-      // when they get to the protected page and click the back button, they
-      // won't end up back on the login page, which is also really nice for the
-      // user experience.
-
       console.log('just before navigate in signIn')
       navigate(from, { replace: true });
     });
